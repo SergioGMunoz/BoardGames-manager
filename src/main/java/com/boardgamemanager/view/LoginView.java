@@ -55,11 +55,11 @@ public class LoginView extends JPanel {
 		add(btnSignUp);
 		
 		pfPassword = new JPasswordField();
-		pfPassword.setAlignmentX(Component.LEFT_ALIGNMENT);
+		pfPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pfPassword.setBounds(492, 333, 120, 20);
 		add(pfPassword);
 		
-		JLabel lbError = new JLabel("Error comun predeterminado");
+		JLabel lbError = new JLabel("");
 		lbError.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lbError.setForeground(new Color(255, 0, 0));
 		lbError.setBounds(399, 362, 300, 14);
