@@ -6,6 +6,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserProfileView extends JPanel {
 
@@ -54,8 +56,12 @@ public class UserProfileView extends JPanel {
 		btnChangePassword.setBounds(398, 367, 180, 25);
 		add(btnChangePassword);
 
-		JButton btnReturn = new JButton("Volver");
-		btnReturn.setBounds(398, 407, 180, 25);
-		add(btnReturn);
+		JButton btnHome = new JButton("Volver al Inicio");
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnHome.setBounds(398, 407, 180, 25);
+		add(btnHome);
 	}
 }
