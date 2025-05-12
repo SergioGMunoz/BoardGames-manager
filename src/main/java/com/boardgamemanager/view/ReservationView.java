@@ -26,21 +26,17 @@ public class ReservationView extends JPanel {
 		tabbedPane.setEnabled(false);
 		tabbedPane.setBounds(0, 0, 1000, 700);
 		add(tabbedPane);
-		
-		// Dentro del constructor ReservationView()
 
 		JPanel panelStep1 = new JPanel();
 		panelStep1.setLayout(null);
 		panelStep1.setBackground(new Color(204, 255, 235));
 		tabbedPane.addTab("Horario y Jugadores", null, panelStep1, null);
 
-		// Título
 		JLabel lbTitle = new JLabel("Reservar un juego");
 		lbTitle.setFont(new Font("Arial", Font.BOLD, 24));
 		lbTitle.setBounds(400, 50, 300, 30);
 		panelStep1.add(lbTitle);
 
-		// Nº de jugadores
 		JLabel lbPlayers = new JLabel("Número de jugadores:");
 		lbPlayers.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lbPlayers.setBounds(320, 120, 150, 20);
@@ -50,7 +46,6 @@ public class ReservationView extends JPanel {
 		spPlayers.setBounds(480, 120, 50, 20);
 		panelStep1.add(spPlayers);
 
-		// Fecha
 		JLabel lbDate = new JLabel("Fecha:");
 		lbDate.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lbDate.setBounds(320, 160, 60, 20);
@@ -79,7 +74,7 @@ public class ReservationView extends JPanel {
 		cbYear.setBounds(560, 160, 70, 20);
 		panelStep1.add(cbYear);
 
-		// Hora
+		
 		JLabel lbTime = new JLabel("Hora de inicio:");
 		lbTime.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lbTime.setBounds(320, 200, 150, 20);
@@ -92,7 +87,6 @@ public class ReservationView extends JPanel {
 		cbHour.setBounds(430, 200, 80, 20);
 		panelStep1.add(cbHour);
 
-		// Info duración y horario
 		JLabel lbGameDuration = new JLabel("La hora de fin se calcula según la duración del juego.");
 		lbGameDuration.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lbGameDuration.setBounds(320, 240, 400, 20);
@@ -103,12 +97,10 @@ public class ReservationView extends JPanel {
 		lbOpeningHours.setBounds(320, 260, 300, 20);
 		panelStep1.add(lbOpeningHours);
 
-		// Botón volver
 		JButton btnBackHome = new JButton("Volver al inicio");
 		btnBackHome.setBounds(318, 308, 132, 25);
 		panelStep1.add(btnBackHome);
 
-		// Botón siguiente paso
 		JButton btnNext = new JButton("Siguiente paso");
 		btnNext.setEnabled(false);
 		btnNext.setBounds(498, 308, 132, 25);
@@ -119,7 +111,6 @@ public class ReservationView extends JPanel {
 		lbError.setBounds(316, 283, 314, 14);
 		panelStep1.add(lbError);
 
-		
 		JPanel panelStep2 = new JPanel();
 		panelStep2.setBackground(new Color(204, 255, 235));
 		tabbedPane.addTab("Selección de Juego", null, panelStep2, null);

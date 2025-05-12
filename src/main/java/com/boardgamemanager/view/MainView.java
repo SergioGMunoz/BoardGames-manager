@@ -37,7 +37,7 @@ public class MainView extends JFrame {
 	 */
 	public MainView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 700);
+		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(null);
 		
 		panel = new JPanel();
