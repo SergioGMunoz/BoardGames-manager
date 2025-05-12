@@ -84,7 +84,7 @@ public class ReservationStep1View extends JPanel {
 		btnNext.setBounds(340, 339, 132, 25);
 		add(btnNext);
 
-		lbError = new JLabel(" ");
+		lbError = new JLabel(" ",SwingConstants.CENTER);
 		lbError.setForeground(Color.RED);
 		lbError.setBounds(158, 314, 314, 14);
 		add(lbError);

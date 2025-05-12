@@ -3,9 +3,9 @@ package com.boardgamemanager.controller;
 import java.util.ArrayList;
 
 import com.boardgamemanager.model.ConectionDB;
+import com.boardgamemanager.view.GamesListView;
 import com.boardgamemanager.view.LoginView;
 import com.boardgamemanager.view.MainView;
-import com.boardgamemanager.view.ReservationStep2View;
 
 public class Launcher {
 
@@ -18,11 +18,11 @@ public class Launcher {
 		
 		
 		 ArrayList<Object[]> juegos = new ArrayList<>();
-         juegos.add(new Object[]{1, "Catan", "Estrategia", 3, 4, 60, 10, "img/games/catan.png"});
-         juegos.add(new Object[]{2, "UNO", "Cartas", 2, 10, 20, 7, "img/games/uno.png"});
-         juegos.add(new Object[]{3, "Ajedrez", "Clásico", 2, 2, 30, 8, null});
+	     juegos.add(new Object[]{1, "Catan", "Estrategia", 3, 4, 60, 10, "img/games/catan.png"});
+	     juegos.add(new Object[]{2, "UNO", "Cartas", 2, 10, 20, 7, "img/games/uno.png"});
+	     juegos.add(new Object[]{3, "Ajedrez", "Clásico", 2, 2, 30, 8, null});
 
-		ReservationStep2View rsv = new ReservationStep2View(juegos);
+		GamesListView rsv = new GamesListView(juegos);
 		
 		mainView.setContentPane(rsv);
 		mainView.setVisible(true);
