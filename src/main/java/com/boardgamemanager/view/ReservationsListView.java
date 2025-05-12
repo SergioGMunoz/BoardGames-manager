@@ -21,6 +21,8 @@ public class ReservationsListView extends JPanel {
 	private JCheckBox cbConfirmDelete;
 	private JButton btnDelete;
 	private JButton btnHome;
+	
+	
 
 	public ReservationsListView() {
 		setBackground(new Color(204, 255, 235));
