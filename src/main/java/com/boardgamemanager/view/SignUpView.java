@@ -7,7 +7,7 @@ public class SignUpView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JTextField tfUser;
+	private JTextField tfName;
 	private JPasswordField pfPassword;
 	private JPasswordField pfRepeatPassword;
 	private JTextField tfMail;
@@ -18,18 +18,18 @@ public class SignUpView extends JPanel {
 
 		JLabel lbTitle = new JLabel("Registro", SwingConstants.CENTER);
 		lbTitle.setFont(new Font("Arial", Font.BOLD, 24));
-		lbTitle.setBounds(0, 99, 640, 43);
+		lbTitle.setBounds(0, 117, 640, 43);
 		add(lbTitle);
 
-		JLabel lbUser = new JLabel("Usuario");
-		lbUser.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbUser.setBounds(182, 206, 83, 14);
-		add(lbUser);
+		JLabel lbName = new JLabel("Nombre");
+		lbName.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lbName.setBounds(182, 184, 83, 14);
+		add(lbName);
 
-		tfUser = new JTextField();
-		tfUser.setBounds(319, 204, 120, 20);
-		add(tfUser);
-		tfUser.setColumns(10);
+		tfName = new JTextField();
+		tfName.setBounds(319, 182, 120, 20);
+		add(tfName);
+		tfName.setColumns(10);
 
 		JLabel lbPassword = new JLabel("Contraseña");
 		lbPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -66,12 +66,12 @@ public class SignUpView extends JPanel {
 		
 		JLabel lbMail = new JLabel("Mail");
 		lbMail.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbMail.setBounds(182, 169, 83, 14);
+		lbMail.setBounds(182, 213, 83, 14);
 		add(lbMail);
 		
 		tfMail = new JTextField();
 		tfMail.setColumns(10);
-		tfMail.setBounds(319, 167, 120, 20);
+		tfMail.setBounds(319, 211, 120, 20);
 		add(tfMail);
 	}
 }
