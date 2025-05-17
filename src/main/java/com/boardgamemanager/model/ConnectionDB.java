@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class ConectionDB {
+public class ConnectionDB {
     String user;
     String pwd;
     String host;
@@ -15,7 +15,7 @@ public class ConectionDB {
     Connection connection;
 
 
-    public ConectionDB(String user, String pwd, String host, String port, String dbName) {
+    public ConnectionDB(String user, String pwd, String host, String port, String dbName) {
         this.user = user;
         this.pwd = pwd;
         this.host = host;
@@ -34,7 +34,7 @@ public class ConectionDB {
     	try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			connection = DriverManager.getConnection(url, user, pwd);
-			System.out.println("✔️ Conexión exitosa con la BBDD" + dbName);
+			System.out.println("✔️ Conexión exitosa con la BBDD: " + dbName);
     	} catch (ClassNotFoundException e) {
 			System.err.println("❌ Driver JDBC No encontrado");
 			e.printStackTrace();

@@ -13,7 +13,7 @@ import javax.swing.JPasswordField;
 public class LoginView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField tfUser;
+	private JTextField tfMail;
 	private JPasswordField pfPassword;
 
 	/**
@@ -23,22 +23,22 @@ public class LoginView extends JPanel {
 		setBackground(new Color(204, 255, 235));
 		setLayout(null);
 		
-		JLabel lbLogin = new JLabel("Iniciar Sesión");
-		lbLogin.setBackground(new Color(240, 240, 240));
-		lbLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lbLogin.setFont(new Font("Arial", Font.BOLD, 24));
-		lbLogin.setBounds(222, 140, 205, 43);
-		add(lbLogin);
+		JLabel lbTitle = new JLabel("Iniciar Sesión");
+		lbTitle.setBackground(new Color(240, 240, 240));
+		lbTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lbTitle.setFont(new Font("Arial", Font.BOLD, 24));
+		lbTitle.setBounds(222, 140, 205, 43);
+		add(lbTitle);
 		
-		tfUser = new JTextField();
-		tfUser.setBounds(293, 199, 120, 20);
-		add(tfUser);
-		tfUser.setColumns(10);
+		tfMail = new JTextField();
+		tfMail.setBounds(293, 199, 120, 20);
+		add(tfMail);
+		tfMail.setColumns(10);
 		
-		JLabel lbUser = new JLabel("Usuario");
-		lbUser.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbUser.setBounds(200, 202, 83, 14);
-		add(lbUser);
+		JLabel lbMail = new JLabel("E-Mail");
+		lbMail.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lbMail.setBounds(200, 202, 83, 14);
+		add(lbMail);
 		
 		JLabel lbPassword = new JLabel("Contraseña");
 		lbPassword.setFont(new Font("Tahoma", Font.BOLD, 11));

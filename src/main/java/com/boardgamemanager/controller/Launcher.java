@@ -2,7 +2,7 @@ package com.boardgamemanager.controller;
 
 import java.util.ArrayList;
 
-import com.boardgamemanager.model.ConectionDB;
+import com.boardgamemanager.model.ConnectionDB;
 import com.boardgamemanager.view.GamesListView;
 import com.boardgamemanager.view.LoginView;
 import com.boardgamemanager.view.MainView;
@@ -11,7 +11,7 @@ public class Launcher {
 
 	public static void main(String[] args) {
 		System.out.println("✅ Proyecto listo y funcionando.");
-		ConectionDB conectionDB = new ConectionDB ("Java", "Hola12345", "localhost", "3306", "School_DB");
+		ConnectionDB conectionDB = new ConnectionDB ("Java", "Hola12345", "localhost", "3306", "School_DB");
 		
 		MainView mainView = new MainView();
 		LoginView lv = new LoginView();
