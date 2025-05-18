@@ -1,8 +1,8 @@
-package com.boardgamemanager.controller;
+package controller;
 
-import com.boardgamemanager.model.ConnectionDB;
-import com.boardgamemanager.view.LoginView;
-import com.boardgamemanager.view.MainView;
+import model.ConnectionDB;
+import view.LoginView;
+import view.MainView;
 
 public class Launcher {
 
