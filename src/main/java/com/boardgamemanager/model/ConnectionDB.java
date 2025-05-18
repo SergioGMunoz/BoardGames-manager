@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class ConectionDB {
+public class ConnectionDB {
     static Connection connection;
 
 
@@ -20,6 +20,7 @@ public class ConectionDB {
 			connection = DriverManager.getConnection(url, user, pwd);
 			System.out.println("✔️ Conexión exitosa con la BBDD" + dbName);
 			return true;
+
     	} catch (ClassNotFoundException e) {
 			System.err.println("❌ Driver JDBC No encontrado");
 			e.printStackTrace();
