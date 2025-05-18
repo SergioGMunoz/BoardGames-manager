@@ -6,35 +6,21 @@ import java.sql.SQLException;
 
 
 public class ConnectionDB {
-    String user;
-    String pwd;
-    String host;
-    String port;
-    String dbName;
-    String url;
-    Connection connection;
+    static Connection connection;
 
 
-    public ConnectionDB(String user, String pwd, String host, String port, String dbName) {
-        this.user = user;
-        this.pwd = pwd;
-        this.host = host;
-        this.port = port;
-        this.dbName = dbName;
-        this.url = "jdbc:mysql://" + host + ":" + port + "/" + dbName;
-        connect();
-    }
-    
-    public Connection getConnection() {
+    static public Connection getConnection() {
 		return connection;
 	}
 
-	public void connect() {
-    	Connection connection = null;
+	public static boolean connect(String user, String pwd, String host, String port, String dbName) {
+    	String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName;
     	try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			connection = DriverManager.getConnection(url, user, pwd);
-			System.out.println("✔️ Conexión exitosa con la BBDD: " + dbName);
+			System.out.println("✔️ Conexión exitosa con la BBDD" + dbName);
+			return true;
+
     	} catch (ClassNotFoundException e) {
 			System.err.println("❌ Driver JDBC No encontrado");
 			e.printStackTrace();
@@ -45,9 +31,10 @@ public class ConnectionDB {
 			System.err.println("❌ Error general de Conexión");
 			e.printStackTrace();
 		}
+    	return false;
     }
     
-    public boolean close() {
+    public static boolean close() {
     	try {
     		connection.close();
     		System.out.println("✔️ Conexión cerrada correctamente");
