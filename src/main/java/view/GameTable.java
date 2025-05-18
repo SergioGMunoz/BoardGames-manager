@@ -1,11 +1,13 @@
-package com.boardgamemanager.view;
+package view;
 
-import javax.swing.*;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.io.File;
-import java.util.ArrayList;
+
+import utils.ImageUtils;
 
 public class GameTable extends JTable {
     private DefaultTableModel tableModel;
@@ -22,7 +24,7 @@ public class GameTable extends JTable {
         setFillsViewportHeight(true);
         getTableHeader().setReorderingAllowed(false);
 
-        // Render personalizado para imágenes en columna 0
+        // Imágenes 
         getColumnModel().getColumn(6).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             public void setValue(Object value) {
@@ -47,20 +49,11 @@ public class GameTable extends JTable {
                 game[3] + "–" + game[4], // Nº Jugadores
                 game[5], // Duración
                 game[6], // Edad mínima
-                loadImageIcon((String) game[7]) // Imagen convertida a ImageIcon
+                ImageUtils.loadImageIcon(game[7].toString(), 50, 50) // Imagen
             });
         }
     }
 
-    private ImageIcon loadImageIcon(String path) {
-        int width = 50, height = 50;
-        if (path == null) return null;
-        File file = new File(path);
-        if (file.exists()) {
-            ImageIcon icon = new ImageIcon(path);
-            Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            return new ImageIcon(img);
-        }
-        return null;
-    }
+
+   
 }

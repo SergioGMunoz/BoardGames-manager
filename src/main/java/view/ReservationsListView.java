@@ -1,4 +1,4 @@
-package com.boardgamemanager.view;
+package view;
 
 import java.awt.Color;
 import java.awt.Font;

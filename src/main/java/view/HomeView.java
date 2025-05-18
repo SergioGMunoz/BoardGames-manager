@@ -1,4 +1,4 @@
-package com.boardgamemanager.view;
+package view;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
