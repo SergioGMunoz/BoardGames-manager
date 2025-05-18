@@ -1,1 +1,39 @@
+<<<<<<< HEAD
 /target/
+=======
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Archivos personales temporales
+*.iml
+*.swp
+*.bak
+*~
+
+# IDEs (opcional)
+.idea/
+*.ipr
+*.iws
+
+# Java compilados
+*.class
+>>>>>>> branch 'main' of https://github.com/SergioGMunoz/BoardGames-manager.git
