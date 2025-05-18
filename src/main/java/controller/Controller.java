@@ -11,11 +11,15 @@ public abstract class Controller {
         this.mainView = mainView;
     }
 	
-	// Cambiar el JPanel de la Vista principal
+	// Actualiza el JPanel de la Vista principal 
     void setView(JPanel newView) {
     	if (!mainView.isVisible()) {
     		mainView.setVisible(true);
     	}
         mainView.setContentPane(newView);
+        
+        // Re dibujar la interfaz
+        mainView.revalidate();
+        mainView.repaint();
     }
 }

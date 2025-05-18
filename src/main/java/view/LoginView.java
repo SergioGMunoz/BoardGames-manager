@@ -26,30 +26,37 @@ public class LoginView extends JPanel implements ErrorDisplayable {
 	private JButton btnLogin;
 	private JLabel lbError;
 	private AuthController authController;
+	private JLabel lbSucess;
 	
-	public JButton getBtnLogin() {
-		return btnLogin;
+	// Muestra mensaje de exito
+	public void showSucess(String msg) {
+		lbSucess.setText(msg);
 	}
 	
+	//Muestra mensaje de error
 	@Override
 	public void showError(String msg) {
 		lbError.setText(msg);
 		resetFields();
 	}
 	
+	// Deja de mostrar mensajes de error y exito
 	@Override
-	public void clearError() {
+	public void clearMsg() {
 		lbError.setText("");
+		lbSucess.setText("");
 	}
-	
+	// Obtiene el texto del campo de texto mail
 	public String getMail() {
 		return tfMail.getText();
 	}
 	
+	// Obtiene el texto del campo de texto password
 	public String getPassword() {
 	    return new String(pfPassword.getPassword());
 	}
 	
+	// Habilita o deshabilita el BtnLogin y borra mensajes si los campos estan rellenos
 	private void updateBtnLogin() {
 	    String mail = tfMail.getText().trim();
 	    String pwd = new String(pfPassword.getPassword()).trim();
@@ -57,14 +64,22 @@ public class LoginView extends JPanel implements ErrorDisplayable {
 	    // Habilita el botón si ambos campos tienen texto
 	    boolean isValid = !mail.isEmpty() && !pwd.isEmpty();
 	    
-	    if (isValid) clearError();
+	    if (isValid) clearMsg();
 	    btnLogin.setEnabled(isValid);
 	}
 	
+	// Vacia los campos de texto
 	public void resetFields() {
 		tfMail.requestFocusInWindow();
 		tfMail.setText("");
 		pfPassword.setText("");
+	}
+	
+	// Rellena los campos mail y password
+	public void setFields(String mail, String pwd) {
+		tfMail.setText(mail);
+		pfPassword.setText(pwd);
+		updateBtnLogin();
 	}
 
 	
@@ -119,6 +134,12 @@ public class LoginView extends JPanel implements ErrorDisplayable {
 		lbError.setBounds(0, 264, 640, 14);
 		add(lbError);
 		
+		lbSucess = new JLabel("", SwingConstants.CENTER);
+		lbSucess.setForeground(new Color(0, 128, 0));
+		lbSucess.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lbSucess.setBounds(0, 177, 640, 14);
+		add(lbSucess);
+		
 		tfMail.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -156,8 +177,13 @@ public class LoginView extends JPanel implements ErrorDisplayable {
 		        }
 		    }
 		});
+		
+		btnSignUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				authController.startSignUp();
+			}
+		});
 
 		
 	}
-
 }

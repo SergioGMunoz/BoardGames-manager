@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class AuthDAO {
 	Connection conn=ConnectionDB.getConnection();
 	
-	// Devuelve si el usuario existe en la BBDD
+	// Devuelve si el usuario y contraseña en la BBDD
 	public boolean userExists(String mail, String pwd) {
 		try {
 			PreparedStatement st = conn.prepareStatement(
@@ -18,7 +18,6 @@ public class AuthDAO {
 			ResultSet rs = st.executeQuery();
 			 if (rs.next()) {
 				 int num_users = rs.getInt("num_users");
-				 System.out.println(num_users);
                  return num_users > 0;
              }
 			
@@ -28,4 +27,45 @@ public class AuthDAO {
         }
 		return false;
 	}
+	
+	//Devuelve si el mail ya esta registrado en la BBDD
+	public boolean mailExists(String mail) {
+	    try {
+	        PreparedStatement st = conn.prepareStatement(
+	                "SELECT COUNT(*) as mails FROM users WHERE mail = ?");
+	        st.setString(1, mail);
+	        ResultSet rs = st.executeQuery();
+	        
+	        if (rs.next()) {
+	            int count = rs.getInt("mails");
+	            return count > 0;
+	        }
+	        
+	    } catch (SQLException e) {
+	        System.err.println("❌ Error al comprobar si el correo existe");
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
+	//Devuelve si el usuario ha sido registrado en la BBDD
+	public boolean registerUser(String name, String mail, String hashedPwd) {
+	    String sql = "INSERT INTO users (name, mail, password) VALUES (?, ?, ?)";
+
+	    try (PreparedStatement st = conn.prepareStatement(sql)) {
+	        st.setString(1, name);
+	        st.setString(2, mail.toLowerCase()); 
+	        st.setString(3, hashedPwd);
+
+	        int filas = st.executeUpdate();
+	        System.out.println("FILAS: " + filas);
+	        return filas >= 1;
+
+	    } catch (SQLException e) {
+	    	System.out.println("Error insert SQL");
+	        System.err.println("❌ Error SQL al registrar el usuario: " + e.getMessage());
+	        return false;
+	    }
+	}
+
 }

@@ -8,6 +8,8 @@ public class PasswordUtils {
 
 	// Enlace investigación
 	// https://www.baeldung.com/sha-256-hashing-java
+	
+	// Encripta la contraseña a sha-256
     public static String hashPassword(String original) {
         try {
         	MessageDigest digest = MessageDigest.getInstance("SHA-256");

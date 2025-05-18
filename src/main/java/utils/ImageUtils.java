@@ -6,6 +6,8 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 public class ImageUtils {
+	
+	// Devuelve una imagen encotrada en el path con las dimensiones with y height
     public static ImageIcon loadImageIcon(String path, int width, int height) {
         if (path == null) return null;
 

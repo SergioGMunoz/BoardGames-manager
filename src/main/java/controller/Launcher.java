@@ -12,7 +12,7 @@ public class Launcher {
 			
 			// Instanciar controlladores 
 			AuthController authController = new AuthController(new MainView());
-			authController.start();
+			authController.startLogin();
 			
 			System.out.println("✅ Proyecto listo y funcionando.");
 		}
