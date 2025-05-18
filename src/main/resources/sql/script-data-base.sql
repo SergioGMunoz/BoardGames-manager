@@ -1156,7 +1156,8 @@ SELECT * FROM USERS; */
 
 -- Insertar datos de usuario
 INSERT INTO USERS (name, mail, password) VALUES
-('Sergio', 'sergio@gmail.com', 'Hola12345');
+('sergio', 'sergio@gmail.com', '36033babfb48ec64e197c97fb40d65e6c79f81e04c61aeccef3009e01645ab8d'),
+('admin','admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
 -- Inserts de los juegos de mesa 
 INSERT INTO CATEGORIES (name) VALUES
@@ -1167,26 +1168,25 @@ INSERT INTO CATEGORIES (name) VALUES
 ('Narrativo'),
 ('Party'),
 ('Rol');
-
 INSERT INTO GAMES (name, min_players, max_players, duration, min_age, src_img) VALUES
-('Arnak', 1, 4, '01:30:00', 12, 'img/games/arnak.png'),
-('Catan', 3, 4, '01:15:00', 10, 'img/games/catan.png'),
-('Caza Bombas', 2, 4, '00:20:00', 8, 'img/games/caza-bombas.png'),
-('Código Secreto', 2, 8, '00:15:00', 10, 'img/games/codigo-secreto.png'),
-('Cthulhu', 2, 5, '01:00:00', 14, 'img/games/cthulhu.png'),
-('Dixit', 3, 6, '00:30:00', 8, 'img/games/dixit.png'),
-('Happy Mochi', 2, 4, '00:20:00', 4, 'img/games/happy-mochi.png'),
-('Hitster', 2, 10, '00:30:00', 16, 'img/games/hitster.png'),
-('Mansiones de la Locura', 1, 5, '02:00:00', 14, 'img/games/mansiones-locura.png'),
-('Misión Cumplida', 1, 4, '00:20:00', 8, 'img/games/mision-cumplida.png'),
-('Pelusas', 2, 5, '00:30:00', 6, 'img/games/pelusas.png'),
-('Root', 2, 4, '01:30:00', 10, 'img/games/root.png'),
-('Sail', 2, 2, '00:30:00', 8, 'img/games/sail.png'),
-('Sherlock', 1, 8, '00:30:00', 10, 'img/games/sherlock.png'),
-('Survive Island', 2, 4, '00:45:00', 8, 'img/games/survive-island.png'),
-('Sushi Go', 2, 5, '00:20:00', 8, 'img/games/sushi-go.png'),
-('Uno', 2, 10, '00:30:00', 7, 'img/games/uno.png'),
-('Wingspan', 1, 5, '01:00:00', 10, 'img/games/wingspan.png');
+('Arnak', 1, 4, '01:30:00', 12, 'img/arnak.png'),
+('Catan', 3, 4, '01:15:00', 10, 'img/catan.png'),
+('Caza Bombas', 2, 4, '00:20:00', 8, 'img/caza-bombas.png'),
+('Código Secreto', 2, 8, '00:15:00', 10, 'img/codigo-secreto.png'),
+('Cthulhu', 2, 5, '01:00:00', 14, 'img/cthulhu.png'),
+('Dixit', 3, 6, '00:30:00', 8, 'img/dixit.png'),
+('Happy Mochi', 2, 4, '00:20:00', 4, 'img/happy-mochi.png'),
+('Hitster', 2, 10, '00:30:00', 16, 'img/hitster.png'),
+('Mansiones de la Locura', 1, 5, '02:00:00', 14, 'img/mansiones-locura.png'),
+('Misión Cumplida', 1, 4, '00:20:00', 8, 'img/mision-cumplida.png'),
+('Pelusas', 2, 5, '00:30:00', 6, 'img/pelusas.png'),
+('Root', 2, 4, '01:30:00', 10, 'img/root.png'),
+('Sail', 2, 2, '00:30:00', 8, 'img/sail.png'),
+('Sherlock', 1, 8, '00:30:00', 10, 'img/sherlock.png'),
+('Survive Island', 2, 4, '00:45:00', 8, 'img/survive-island.png'),
+('Sushi Go', 2, 5, '00:20:00', 8, 'img/sushi-go.png'),
+('Uno', 2, 10, '00:30:00', 7, 'img/uno.png'),
+('Wingspan', 1, 5, '01:00:00', 10, 'img/wingspan.png');
 
 INSERT INTO GAME_CATEGORY (id_game, id_category) VALUES
 (1, 3),   -- Arnak - Estrategia
@@ -1218,3 +1218,5 @@ INSERT INTO GAME_CATEGORY (id_game, id_category) VALUES
 (17, 1),  -- Uno - Cartas
 (17, 4),  -- Uno - Infantil
 (18, 3);  -- Wingspan - Estrategia
+
+SELECT * FROM users;
