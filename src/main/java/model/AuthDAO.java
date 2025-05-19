@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AuthDAO {
 	Connection conn=ConnectionDB.getConnection();
@@ -66,6 +67,32 @@ public class AuthDAO {
 	        System.err.println("❌ Error SQL al registrar el usuario: " + e.getMessage());
 	        return false;
 	    }
+	}
+	
+	// Devuelve la información de un usuario cuya ID
+	public ArrayList<Object> getUserByMail(String mail) {
+		ArrayList<Object> dataUser = null;
+		try {
+	        PreparedStatement st = conn.prepareStatement(
+	                "SELECT * FROM users WHERE mail = ?");
+	        st.setString(1, mail);
+	        ResultSet rs = st.executeQuery();
+	        
+	        if (rs.next()) {
+	        	dataUser = new ArrayList<>();
+	        	dataUser.add(rs.getInt("id"));
+	            dataUser.add(rs.getString("name"));
+	            dataUser.add(rs.getString("mail")); 
+	            dataUser.add(rs.getBoolean("mail_verified"));
+	            dataUser.add(rs.getString("password"));
+	            dataUser.add(rs.getDate("reg_date"));
+	        }
+	        
+	    } catch (SQLException e) {
+	        System.err.println("❌ Error SQL al buscar user con mail: " + mail);
+	        e.printStackTrace();
+	    }
+	    return dataUser;
 	}
 
 }

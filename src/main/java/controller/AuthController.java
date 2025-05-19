@@ -3,6 +3,7 @@ package controller;
 import model.AuthDAO;
 
 import utils.PasswordUtils;
+import utils.Session;
 import utils.exceptions.*;
 import utils.Validator;
 
@@ -38,6 +39,7 @@ public class AuthController extends Controller{
 
 	    // Validar datos BBDD 
 	    if(authDAO.userExists(mail, encryptedPwd)) {
+	    	Session.startSession(authDAO.getUserByMail(mail));
 	    	login();
 	    }else {
 	    	loginView.showError("Usuario o contraseña incorrecto");
