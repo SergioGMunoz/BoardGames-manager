@@ -11,31 +11,26 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 
 public class MainView extends JFrame {
-
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private static MainView instance;
 	JPanel panel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainView frame = new MainView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public MainView() {
+        instance = this; 
+        init(); 
+    }
+	
+	// Devuelve la misma instancia
+	public static MainView getInstance() {
+        return instance;
+    }
 
 	/**
 	 * Create the frame.
 	 */
-	public MainView() {
+	private void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		getContentPane().setLayout(null);

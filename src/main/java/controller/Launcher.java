@@ -11,7 +11,7 @@ public class Launcher {
 		if (ConnectionDB.connect("JavaDev", "Java12345", "localhost", "3306", "board_games_db")) {
 			
 			// Instanciar controlladores 
-			AuthController authController = new AuthController(new MainView());
+			AuthController authController = new AuthController();
 			authController.startLogin();
 			
 			System.out.println("✅ Proyecto listo y funcionando.");

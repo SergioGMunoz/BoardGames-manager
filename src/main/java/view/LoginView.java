@@ -180,7 +180,7 @@ public class LoginView extends JPanel implements ErrorDisplayable {
 		
 		btnSignUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				authController.startSignUp();
+				authController.goSignUp();
 			}
 		});
 

@@ -16,8 +16,8 @@ public class AuthController extends Controller{
 	AuthDAO authDAO;
 	SignUpView signUpView;
 
-	public AuthController(MainView mainView) {
-		super(mainView);
+	public AuthController() {
+		super();
 		this.loginView = new LoginView(this);
 		this.authDAO = new AuthDAO();
 	}
@@ -40,19 +40,20 @@ public class AuthController extends Controller{
 	    // Validar datos BBDD 
 	    if(authDAO.userExists(mail, encryptedPwd)) {
 	    	Session.startSession(authDAO.getUserByMail(mail));
-	    	login();
+	    	goHome();
 	    }else {
 	    	loginView.showError("Usuario o contraseña incorrecto");
 	    }
 	}
 	
 	// El login es correcto, ir a ventana home
-	private void login() {
-		System.out.println("Login correcto");
+	private void goHome() {
+		HomeController homeController = new HomeController();
+		homeController.startHome();
 	}
 	
 	//Inicia la ventana de signUp
-	public void startSignUp() {
+	public void goSignUp() {
 		if(signUpView == null) {
 			signUpView = new SignUpView(this);
 		}
@@ -110,11 +111,11 @@ public class AuthController extends Controller{
 			return;
 		}
 		
-		signUp();
+		goLoginFromSignUp();
 	}
 	
 	// El usuario se registra volver a login rellenar datos
-	private void signUp() {
+	private void goLoginFromSignUp() {
 		startLogin();
 		loginView.setFields(signUpView.getMail(), signUpView.getPassword());
 		loginView.showSucess("Usuario registrado");

@@ -1,0 +1,51 @@
+package controller;
+
+import utils.Session;
+import view.HomeView;
+
+public class HomeController extends Controller{
+	
+	HomeView homeView;
+	
+	public HomeController() {
+		super();
+		this.homeView = new HomeView(this);
+	}
+	
+	// Muestra la vista de home
+	public void startHome() {
+		homeView.clearMsg();
+		setView(homeView);
+	}
+	
+	// Ir a la ventana UserProfile
+	public void goUserProfile() {
+	    System.out.println("User profile");
+	}
+	
+	// Ir a la ventana ReserveGame
+	public void goReserveGame() {
+	    System.out.println("Reserve game");
+	}
+
+	// Ir a la ventana ViewReservations
+	public void goViewReservations() {
+	    System.out.println("View reservations");
+	}
+
+	// Ir a la ventana GameList
+	public void goGameList() {
+	    System.out.println("Game list");
+	}
+
+	// Cerrar sesión y volver al login
+	public void goLogin() {
+		if (Session.endSession()) {
+			AuthController authController = new AuthController();
+			authController.startLogin();
+		}else {
+			homeView.showError("Error inseperado al cerrar sesión");
+		}
+	}
+
+}
