@@ -20,11 +20,14 @@ public class HomeController extends Controller{
 	
 	// Ir a la ventana UserProfile
 	public void goUserProfile() {
-	    System.out.println("User profile");
+		UserController userController = new UserController();
+		userController.startUserProfile();
 	}
 	
 	// Ir a la ventana ReserveGame
 	public void goReserveGame() {
+		ReservationController reservationController = new ReservationController();
+		reservationController.startReservation1();
 	    System.out.println("Reserve game");
 	}
 

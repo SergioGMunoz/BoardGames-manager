@@ -1220,3 +1220,34 @@ INSERT INTO GAME_CATEGORY (id_game, id_category) VALUES
 (18, 3);  -- Wingspan - Estrategia
 
 SELECT * FROM users;
+
+SELECT 
+    name, mail, 
+    (SELECT COUNT(*) FROM RESERVATIONS WHERE id_user=1) AS tot_games_played, 
+    (
+        SELECT id_game
+        FROM reservations
+        WHERE id_user=2
+        GROUP BY id_game
+        ORDER BY COUNT(*) DESC
+        LIMIT 1;
+    ) AS top_game, 
+    reg_date
+FROM USERS 
+WHERE id=1;
+
+
+
+
+
+-- Reservas para user con id=2 (admin)
+INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) VALUES
+(2, 2, 4, '2024-06-01', '18:00:00', '19:15:00'),   -- Catan
+(2, 2, 3, '2024-06-02', '20:00:00', '21:00:00'),   -- Cthulhu
+(2, 12, 2, '2024-06-03', '17:00:00', '18:30:00');  -- Root
+
+-- Otras reservas para otros usuarios (ejemplo para user id=1)
+INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) VALUES
+(2, 1, 3, '2024-06-01', '16:00:00', '17:30:00'),   -- Arnak
+(2, 4, 4, '2024-06-04', '19:00:00', '19:45:00'),   -- Código Secreto
+(2, 8, 5, '2024-06-05', '21:00:00', '21:30:00');   -- Hitster
