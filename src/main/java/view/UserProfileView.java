@@ -201,7 +201,6 @@ public class UserProfileView extends JPanel implements ErrorDisplayable{
 			}
 		});
 		
-		
 		// Presionando boton cambiar nombre
 		btnChangeUserName.addActionListener(e -> pressBtnChangeName());
 		

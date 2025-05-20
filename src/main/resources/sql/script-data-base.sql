@@ -1218,28 +1218,6 @@ INSERT INTO GAME_CATEGORY (id_game, id_category) VALUES
 (17, 1),  -- Uno - Cartas
 (17, 4),  -- Uno - Infantil
 (18, 3);  -- Wingspan - Estrategia
-
-SELECT * FROM users;
-
-SELECT 
-    name, mail, 
-    (SELECT COUNT(*) FROM RESERVATIONS WHERE id_user=1) AS tot_games_played, 
-    (
-        SELECT id_game
-        FROM reservations
-        WHERE id_user=2
-        GROUP BY id_game
-        ORDER BY COUNT(*) DESC
-        LIMIT 1;
-    ) AS top_game, 
-    reg_date
-FROM USERS 
-WHERE id=1;
-
-
-
-
-
 -- Reservas para user con id=2 (admin)
 INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) VALUES
 (2, 2, 4, '2024-06-01', '18:00:00', '19:15:00'),   -- Catan

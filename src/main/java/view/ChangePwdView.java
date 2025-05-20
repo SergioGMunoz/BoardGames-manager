@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
 import controller.UserController;
+import utils.PasswordUtils;
+import utils.Session;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -33,51 +35,41 @@ public class ChangePwdView extends JPanel implements ErrorDisplayable{
 		super();
 		this.userController = userController;
 		init();
+		clearFields();
 	}
 	
+	public void clearFields() {
+		pfCurrentPassword.setText("");
+		pfNewPassword.setText("");
+		pfRepeatPassword.setText("");
+	}
 	
-	// Devuelve la contraseña actual como texto (String)
+	// Devuelve la contraseña actual como texto 
 	public String getCurrentPassword() {
 	    return new String(pfCurrentPassword.getPassword());
 	}
 
-	// Establece el campo de contraseña actual
-	public void setPfCurrentPassword(JPasswordField pfCurrentPassword) {
-	    this.pfCurrentPassword = pfCurrentPassword;
-	}
-
-	// Devuelve la nueva contraseña como texto (String)
+	// Devuelve la nueva contraseña como texto 
 	public String getNewPassword() {
 	    return new String(pfNewPassword.getPassword());
 	}
 
-
-	public void setPfNewPassword(JPasswordField pfNewPassword) {
-		this.pfNewPassword = pfNewPassword;
+	// Devuelve la contraseña repetida como texto 
+	public String getPfRepeatPassword() {
+		return new String(pfRepeatPassword.getPassword());
 	}
-
-
-
-	public JPasswordField getPfRepeatPassword() {
-		return pfRepeatPassword;
-	}
-
-
-
-	public void setPfRepeatPassword(JPasswordField pfRepeatPassword) {
-		this.pfRepeatPassword = pfRepeatPassword;
-	}
-
 
 
 	@Override
 	public void showError(String msg) {
 		clearMsg();
+		clearFields();
 		lbError.setText(msg);
 	}
 	
 	public void showSucess(String msg) {
 		clearMsg();
+		clearFields();
 		lbSuccess.setText(msg);
 	}
 
@@ -151,7 +143,7 @@ public class ChangePwdView extends JPanel implements ErrorDisplayable{
 		add(lbError);
 		
 		lbSuccess = new JLabel("", SwingConstants.CENTER);
-		lbSuccess.setForeground(Color.GREEN);
+		lbSuccess.setForeground(new Color(0, 128, 0));
 		lbSuccess.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lbSuccess.setBounds(0, 260, 645, 14);
 		add(lbSuccess);
@@ -178,7 +170,7 @@ public class ChangePwdView extends JPanel implements ErrorDisplayable{
 		});
 		
 		btnHome.addActionListener(e -> userController.goUserProfile());
-		btnHome.addActionListener(e -> userController.tryChangePassword());
+		btnChangePwd.addActionListener(e -> userController.tryChangePassword());
 		
 	}
 
