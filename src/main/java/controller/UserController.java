@@ -1,6 +1,7 @@
 package controller;
 
 import model.UserDAO;
+import utils.Debugger;
 import utils.Session;
 import utils.Validator;
 import utils.exceptions.EmptyFieldException;
@@ -31,7 +32,7 @@ public class UserController extends Controller{
 	public String tryChangeName(String newName) {
 		try {
 			Validator.validateName(newName);
-			System.out.println("VALIDADO CORRECTO");
+			Debugger.print("VALIDADO CORRECTO");
 			userDAO.updateUserNameByID(Session.getId(), newName);
 			Session.setName(newName);
 			userProfileView.showSucess("Nombre actualizado con exito");
@@ -61,11 +62,11 @@ public class UserController extends Controller{
 
 	// Intenta cambiar contraseña validando
 	public void tryChangePassword() {
-		System.out.println("Intentando actualizar contraseña");
+		Debugger.print("Intentando actualizar contraseña");
 	}
 
 	public void deleteAccount() {
-		System.out.println("Borrando cuenta user");
+		Debugger.print("Borrando cuenta user");
 	}
 
 }

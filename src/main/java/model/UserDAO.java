@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import utils.Debugger;
+
 public class UserDAO {
 	Connection conn=ConnectionDB.getConnection();
 	
@@ -23,7 +25,7 @@ public class UserDAO {
              }
 			
 		}catch (SQLException e) {
-            System.err.println("❌ Error al comprobar usuario");
+            Debugger.printErr("❌ Error al comprobar usuario");
             e.printStackTrace();
         }
 		return false;
@@ -43,7 +45,7 @@ public class UserDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        System.err.println("❌ Error al comprobar si el correo existe");
+	        Debugger.printErr("❌ Error al comprobar si el correo existe");
 	        e.printStackTrace();
 	    }
 	    return false;
@@ -59,12 +61,12 @@ public class UserDAO {
 	        st.setString(3, hashedPwd);
 
 	        int filas = st.executeUpdate();
-	        System.out.println("FILAS: " + filas);
+	        Debugger.print("FILAS: " + filas);
 	        return filas >= 1;
 
 	    } catch (SQLException e) {
-	    	System.out.println("Error insert SQL");
-	        System.err.println("❌ Error SQL al registrar el usuario: " + e.getMessage());
+	    	Debugger.print("Error insert SQL");
+	        Debugger.printErr("❌ Error SQL al registrar el usuario: " + e.getMessage());
 	        return false;
 	    }
 	}
@@ -89,7 +91,7 @@ public class UserDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        System.err.println("❌ Error SQL al buscar user con mail: " + mail);
+	        Debugger.printErr("❌ Error SQL al buscar user con mail: " + mail);
 	        e.printStackTrace();
 	    }
 	    return dataUser;
@@ -132,7 +134,7 @@ public class UserDAO {
 	        }
 			
 		}catch(SQLException e) {
-			System.err.println("❌ Error SQL al buscar user por id: " + id);
+			Debugger.printErr("❌ Error SQL al buscar user por id: " + id);
 	        e.printStackTrace();
 		}
 		return dataUser;
@@ -150,7 +152,7 @@ public class UserDAO {
 	        return rowsUpdated > 0;
 
 	    } catch (SQLException e) {
-	        System.err.println("❌ Error SQL al actualizar el nombre de usuario id: " + id);
+	        Debugger.printErr("❌ Error SQL al actualizar el nombre de usuario id: " + id);
 	        e.printStackTrace();
 	        return false;
 	    }

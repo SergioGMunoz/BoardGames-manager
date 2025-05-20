@@ -17,7 +17,7 @@ public class ImageUtils {
             Image img = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
             return new ImageIcon(img);
         } else {
-            System.err.println("❌ Imagen no encontrada: " + path);
+           Debugger.printErr("❌ Imagen no encontrada: " + path);
             return null;
         }
     }
