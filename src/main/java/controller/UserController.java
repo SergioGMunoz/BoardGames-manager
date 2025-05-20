@@ -65,8 +65,16 @@ public class UserController extends Controller{
 		Debugger.print("Intentando actualizar contraseña");
 	}
 
+	// Elimina el usuario de la BBDD, termina la sesion y vuelve a login
 	public void deleteAccount() {
-		Debugger.print("Borrando cuenta user");
+		if (userDAO.deleteUserByID(Session.getId())) {
+			Debugger.print("Borrando cuenta user");
+			Session.endSession();
+			AuthController authController = new AuthController();
+			authController.startLogin();
+		}else {
+			userProfileView.showError("Error al eliminar user");
+		}
 	}
 
 }
