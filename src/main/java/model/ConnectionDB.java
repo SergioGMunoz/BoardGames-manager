@@ -24,13 +24,13 @@ public class ConnectionDB {
 			return true;
 
     	} catch (ClassNotFoundException e) {
-			Debugger.printErr("❌ Driver JDBC No encontrado");
+			Debugger.printErr("Driver JDBC No encontrado");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			Debugger.printErr("❌ Error al conectarse a la BD");
+			Debugger.printErr("Error al conectarse a la BD");
 			e.printStackTrace();
 		} catch (Exception e) {
-			Debugger.printErr("❌ Error general de Conexión");
+			Debugger.printErr("Error general de Conexión");
 			e.printStackTrace();
 		}
     	return false;
@@ -44,7 +44,7 @@ public class ConnectionDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}catch(Exception e) {
-			Debugger.printErr("❌ Error inesperado");
+			Debugger.printErr("Error inesperado");
 		}
     	return false;
     }

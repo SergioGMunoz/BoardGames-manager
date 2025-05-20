@@ -25,7 +25,7 @@ public class UserDAO {
              }
 			
 		}catch (SQLException e) {
-            Debugger.printErr("❌ Error al comprobar usuario");
+            Debugger.printErr("Error al comprobar usuario");
             e.printStackTrace();
         }
 		return false;
@@ -45,7 +45,7 @@ public class UserDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        Debugger.printErr("❌ Error al comprobar si el correo existe");
+	        Debugger.printErr("Error al comprobar si el correo existe");
 	        e.printStackTrace();
 	    }
 	    return false;
@@ -66,7 +66,7 @@ public class UserDAO {
 
 	    } catch (SQLException e) {
 	    	Debugger.print("Error insert SQL");
-	        Debugger.printErr("❌ Error SQL al registrar el usuario: " + e.getMessage());
+	        Debugger.printErr("Error SQL al registrar el usuario: " + e.getMessage());
 	        return false;
 	    }
 	}
@@ -91,7 +91,7 @@ public class UserDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        Debugger.printErr("❌ Error SQL al buscar user con mail: " + mail);
+	        Debugger.printErr("Error SQL al buscar user con mail: " + mail);
 	        e.printStackTrace();
 	    }
 	    return dataUser;
@@ -134,12 +134,13 @@ public class UserDAO {
 	        }
 			
 		}catch(SQLException e) {
-			Debugger.printErr("❌ Error SQL al buscar user por id: " + id);
+			Debugger.printErr("Error SQL al buscar user por id: " + id);
 	        e.printStackTrace();
 		}
 		return dataUser;
 	}
 	
+	// Actualiza el nombre de un usuario por su ID
 	public boolean updateUserNameByID(int id, String newUsername) {
 	    String sql = "UPDATE users SET name = ? WHERE id = ?";
 	    
@@ -152,7 +153,7 @@ public class UserDAO {
 	        return rowsUpdated > 0;
 
 	    } catch (SQLException e) {
-	        Debugger.printErr("❌ Error SQL al actualizar el nombre de usuario id: " + id);
+	        Debugger.printErr("Error SQL al actualizar el nombre de usuario id: " + id);
 	        e.printStackTrace();
 	        return false;
 	    }
@@ -167,12 +168,31 @@ public class UserDAO {
 	        return st.executeUpdate() > 0;
 
 	    } catch (SQLException e) {
-	        Debugger.printErr("❌ Error SQL al eliminar el usuario con id: " + id);
+	        Debugger.printErr("Error SQL al eliminar el usuario con id: " + id);
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	
+	// Actualiza la contraseña de un usuario por su id
+	public boolean updatePasswordByID(int id, String newPassword) {
+	    try {
+	    	String sql = "UPDATE users SET password = ? WHERE id = ?";
+	        PreparedStatement st = conn.prepareStatement(sql);
+	        st.setString(1, newPassword);
+	        st.setInt(2, id);
+
+	        int rowsUpdated = st.executeUpdate();
+	        return rowsUpdated > 0;
+
+	    } catch (SQLException e) {
+	        Debugger.printErr("Error SQL al actualizar la contraseña del usuario con id: " + id);
 	        e.printStackTrace();
 	        return false;
 	    }
 	}
 
+	
 
 
 }

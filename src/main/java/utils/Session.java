@@ -89,5 +89,9 @@ public class Session {
 		name = newName;
 	}
 
+	public static void setPassword(String newPassword) {
+		password = newPassword;
+	}
+
    
 }

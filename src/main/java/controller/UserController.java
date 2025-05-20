@@ -2,6 +2,7 @@ package controller;
 
 import model.UserDAO;
 import utils.Debugger;
+import utils.PasswordUtils;
 import utils.Session;
 import utils.Validator;
 import utils.exceptions.EmptyFieldException;
@@ -62,7 +63,45 @@ public class UserController extends Controller{
 
 	// Intenta cambiar contraseña validando
 	public void tryChangePassword() {
-		Debugger.print("Intentando actualizar contraseña");
+	    Debugger.print("Intentando actualizar contraseña");
+
+	    String currentPassword = changePwdView.getCurrentPassword();
+	    String newPassword = changePwdView.getNewPassword();
+	    String repeatPassword = changePwdView.getPfRepeatPassword();
+
+	    Debugger.print("Contraseña actual: " + currentPassword);
+	    Debugger.print("Nueva contraseña: " + newPassword);
+	    Debugger.print("Repetir contraseña: " + repeatPassword);
+	    
+	    // Valida que la contraseña sea correcta
+	    if(!PasswordUtils.hashPassword(currentPassword).equals(Session.getPassword())) {
+	    	changePwdView.showError("La contraseña actual no es correcta");
+	    	return;
+	    }
+	    
+	    Debugger.print("Contraseña actual correcta");
+	    
+	    // Si las contraseñas no coinciden
+	    if (!newPassword.equals(repeatPassword)) {
+	    	changePwdView.showError("Las contraseñas no coinciden");
+	    	return;
+	    }
+	    
+	    Debugger.print("Las contraseñas coinciden");
+	    
+	    // Valida que la constraseña cumpla con la validación
+	    try {
+			Validator.validatePassword(newPassword);
+		} catch (EmptyFieldException | FieldMinMaxCharactersException | SameFieldException e) {
+			changePwdView.showError("La contraseñas " + e.getMessage());
+	    	return;
+		}
+	    
+	    Debugger.print("Contraseña valida, actualizando...");
+	    
+	    userDAO.updatePasswordByID(Session.getId(), PasswordUtils.hashPassword(newPassword));
+	    Session.setPassword(newPassword);
+	    changePwdView.showSucess("Contraseña actualizada con exito");
 	}
 
 	// Elimina el usuario de la BBDD, termina la sesion y vuelve a login
