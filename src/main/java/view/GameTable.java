@@ -12,7 +12,7 @@ import utils.ImageUtils;
 public class GameTable extends JTable {
     private DefaultTableModel tableModel;
 
-    public GameTable(ArrayList<Object[]> games) {
+    public GameTable() {
         // Definimos el modelo de tabla
         String[] columnNames = {
             "ID","Nombre", "Tipo", "Nº Jugadores", "Duración", "Edad Mín", "Imagen"
@@ -32,9 +32,6 @@ public class GameTable extends JTable {
                 setIcon(value instanceof ImageIcon ? (ImageIcon) value : null);
             }
         });
-
-        // Cargar datos
-        updateGames(games);
     }
 
     // Método para actualizar los datos de la tabla

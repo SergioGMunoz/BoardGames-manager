@@ -39,7 +39,8 @@ public class HomeController extends Controller{
 
 	// Ir a la ventana GameList
 	public void goGameList() {
-	    Debugger.print("Game list");
+	    Debugger.print("Ir a Game list");
+	    
 	}
 
 	// Cerrar sesión y volver al login

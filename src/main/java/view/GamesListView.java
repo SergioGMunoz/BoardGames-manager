@@ -1,21 +1,54 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import controller.GameController;
+import utils.Debugger;
 
 public class GamesListView extends JPanel {
     private JLabel lbTitle;
     private JTextField tfSearch;
     private JComboBox<String> cbPlayers;
-    private JComboBox<String> cbType;
+    private JComboBox<String> cbCategory;
     private JComboBox<String> cbOrder;
     private JButton btnFilter;
     private GameTable gameTable;
     private JScrollPane scrollPane;
     private JButton btnHome;
+    private GameController gameController; 
+    private String [] categories;
+    private String [] players;
+    private String [] order;
+    
+    public GamesListView(GameController gameController, GameTable gameTable, String [] categories, String [] players, String [] order) {
+    	this.gameController = gameController;
+    	this.gameTable = gameTable;
+    	this.categories = categories;
+    	this.players = players;
+    	this.order = order;
+    	init();
+    } 
+    
+    public void setGameTable (GameTable gameTable) {
+    	this.gameTable = gameTable;
+    }
+    
+    public void clearFiltersFields() {
+    	Debugger.print("Limpiando campos filtros");
+    }
 
-    public GamesListView(ArrayList<Object[]> games) {
+    private void init() {
         setLayout(null);
         setPreferredSize(new Dimension(640, 480));
         setBackground(new Color(204, 255, 235));
@@ -29,22 +62,18 @@ public class GamesListView extends JPanel {
         tfSearch.setBounds(40, 70, 160, 22);
         add(tfSearch);
 
-        cbPlayers = new JComboBox<>(new String[] {
-            "Cualquier Nº de Jugadores"
-        });
+        cbPlayers = new JComboBox<>();
+        cbPlayers.setModel(new DefaultComboBoxModel<>(players));
         cbPlayers.setBounds(220, 70, 130, 22);
         add(cbPlayers);
 
-        cbType = new JComboBox<>(new String[] {
-            "Cualquier Tipo"
-        });
-        cbType.setBounds(370, 70, 120, 22);
-        add(cbType);
+        cbCategory = new JComboBox<>();
+        cbCategory.setModel(new DefaultComboBoxModel<>(categories));
+        cbCategory.setBounds(370, 70, 120, 22);
+        add(cbCategory);
 
         cbOrder = new JComboBox<>();
-        cbOrder.setModel(new DefaultComboBoxModel<>(new String[] {
-            "Más jugados", "Duración asc", "Duración desc", "Edad desc", "Edad asc"
-        }));
+        cbOrder.setModel(new DefaultComboBoxModel<>(order));
         cbOrder.setBounds(500, 70, 120, 22);
         add(cbOrder);
 
@@ -53,7 +82,6 @@ public class GamesListView extends JPanel {
         btnFilter.setBounds(243, 108, 150, 22);
         add(btnFilter);
 
-        gameTable = new GameTable(games);
         scrollPane = new JScrollPane(gameTable);
         scrollPane.setBounds(40, 140, 560, 225);
         add(scrollPane);

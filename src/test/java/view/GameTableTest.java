@@ -44,7 +44,7 @@ public class GameTableTest {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900, 400);
         frame.setLocationRelativeTo(null);
-        frame.add(new JScrollPane(new GameTable(juegos)));
+        frame.add(new JScrollPane(new GameTable()));
         frame.setVisible(true);
     }
 }
