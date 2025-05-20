@@ -12,13 +12,19 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controller.UserController;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class UserProfileView extends JPanel implements ErrorDisplayable{
 	private JTextField tfUsername, tfEmail, tfGamesPlayed, tfTopGame, tfRegistrationDate;
-	private JButton btnChangePassword, btnDeleteAccount, btnHome, btnChangeUserName;
+	private JButton btnChangePwd, btnDeleteAccount, btnHome, btnChangeUserName;
 	private JCheckBox cbConfirmDelete;
 	private UserController userController;
-	private JLabel lbError;
+	private JLabel lbError, lbSuccess;
 	
 
 	public UserProfileView(UserController userController) {
@@ -43,15 +49,23 @@ public class UserProfileView extends JPanel implements ErrorDisplayable{
 	
 	@Override
 	public void showError(String msg) {
+		clearMsg();
 		lbError.setText(msg);
+	}
+	
+	public void showSucess(String msg) {
+		clearMsg();
+		lbSuccess.setText(msg);
 	}
 
 	@Override
 	public void clearMsg() {
 		lbError.setText("");
+		lbSuccess.setText("");
 	}
 
 	public void updateBtnChangeName() {
+		clearMsg();
 		btnChangeUserName.setEnabled((tfUsername.getText().trim().length()>=0));
 	}
 	
@@ -59,6 +73,22 @@ public class UserProfileView extends JPanel implements ErrorDisplayable{
 		String newName = userController.tryChangeName(tfUsername.getText());
 		tfUsername.setText(newName);
 		btnChangeUserName.setEnabled(true);
+	}
+	
+	private void pressChangePwd() {
+		userController.startChangePwd();
+	}
+	
+	private void updateBtnDeleteAccount() {
+		btnDeleteAccount.setEnabled(cbConfirmDelete.isSelected());
+	}
+	
+	private void pressBtnDeleteAccount() {
+		userController.deleteAccount();
+	}
+	
+	private void pressHome() {
+		userController.goHome();
 	}
 	
 	public void init() {
@@ -120,9 +150,9 @@ public class UserProfileView extends JPanel implements ErrorDisplayable{
 		tfRegistrationDate.setEditable(false);
 		add(tfRegistrationDate);
 
-		btnChangePassword = new JButton("Cambiar contraseña");
-		btnChangePassword.setBounds(211, 254, 180, 25);
-		add(btnChangePassword);
+		btnChangePwd = new JButton("Cambiar contraseña");
+		btnChangePwd.setBounds(211, 254, 180, 25);
+		add(btnChangePwd);
 
 		cbConfirmDelete = new JCheckBox("Estoy seguro de eliminar");
 		cbConfirmDelete.setBackground(new Color(204, 255, 235));
@@ -149,6 +179,40 @@ public class UserProfileView extends JPanel implements ErrorDisplayable{
 		lbError.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lbError.setBounds(0, 79, 645, 14);
 		add(lbError);
+		
+		lbSuccess = new JLabel("", SwingConstants.CENTER);
+		lbSuccess.setForeground(new Color(0, 255, 0));
+		lbSuccess.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lbSuccess.setBounds(0, 79, 645, 14);
+		add(lbSuccess);
+		
+		// Actualizando el campo nombre valida boton
+		tfUsername.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				updateBtnChangeName();
+			}
+		});
+		
+		//Actualizando estado btnDeletAccount
+		cbConfirmDelete.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				updateBtnDeleteAccount();
+			}
+		});
+		
+		
+		// Presionando boton cambiar nombre
+		btnChangeUserName.addActionListener(e -> pressBtnChangeName());
+		
+		// Presionando cambiar contraseña
+		btnChangePwd.addActionListener(e -> pressChangePwd());
+		
+		// Presionando eliminar usuario
+		btnDeleteAccount.addActionListener(e -> pressBtnDeleteAccount());
+		
+		// Presionando volver atras
+		btnHome.addActionListener(e -> pressHome());
+		
 	}
-
 }

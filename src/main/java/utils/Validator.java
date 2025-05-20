@@ -11,8 +11,8 @@ public class Validator {
         }
         
         int lenght = name.trim().length();
-        if (lenght <= 0 || lenght > 15 ) {
-            throw new FieldMinMaxCharactersException(5,15);
+        if (lenght < 4 || lenght > 15 ) {
+            throw new FieldMinMaxCharactersException(4,15);
         }
         
         if (name.equals(Session.getName())) {
@@ -31,7 +31,7 @@ public class Validator {
         }
         
         int lenght = mail.trim().length();
-        if (lenght <= 0 || lenght > 40 ) {
+        if (lenght < 5 || lenght > 40 ) {
             throw new FieldMinMaxCharactersException(5,40);
         }
         

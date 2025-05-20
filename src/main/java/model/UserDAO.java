@@ -139,7 +139,7 @@ public class UserDAO {
 	}
 	
 	public boolean updateUserNameByID(int id, String newUsername) {
-	    String sql = "UPDATE users SET username = ? WHERE user_id = ?";
+	    String sql = "UPDATE users SET name = ? WHERE id = ?";
 	    
 	    try {
 	    	PreparedStatement st = conn.prepareStatement(sql);
