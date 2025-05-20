@@ -1,6 +1,7 @@
 package controller;
 
 import model.UserDAO;
+import utils.Debugger;
 import utils.Session;
 import utils.Validator;
 import utils.exceptions.EmptyFieldException;
@@ -61,11 +62,11 @@ public class UserController extends Controller{
 
 	// Intenta cambiar contraseña validando
 	public void tryChangePassword() {
-		System.out.println("Intentando actualizar contraseña");
+		Debugger.print("Intentando actualizar contraseña");
 	}
 
 	public void deleteAccount() {
-		System.out.println("Borrando cuenta user");
+		Debugger.print("Borrando cuenta user");
 	}
 
 }

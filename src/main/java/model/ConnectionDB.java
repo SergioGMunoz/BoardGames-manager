@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import utils.Debugger;
+
 
 public class ConnectionDB {
     static Connection connection;
@@ -18,17 +20,17 @@ public class ConnectionDB {
     	try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
 			connection = DriverManager.getConnection(url, user, pwd);
-			System.out.println("✔️ Conexión exitosa con la BBDD" + dbName);
+			Debugger.print("✔️ Conexión exitosa con la BBDD" + dbName);
 			return true;
 
     	} catch (ClassNotFoundException e) {
-			System.err.println("❌ Driver JDBC No encontrado");
+			Debugger.printErr("❌ Driver JDBC No encontrado");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.err.println("❌ Error al conectarse a la BD");
+			Debugger.printErr("❌ Error al conectarse a la BD");
 			e.printStackTrace();
 		} catch (Exception e) {
-			System.err.println("❌ Error general de Conexión");
+			Debugger.printErr("❌ Error general de Conexión");
 			e.printStackTrace();
 		}
     	return false;
@@ -37,12 +39,12 @@ public class ConnectionDB {
     public static boolean close() {
     	try {
     		connection.close();
-    		System.out.println("✔️ Conexión cerrada correctamente");
+    		Debugger.print("✔️ Conexión cerrada correctamente");
     		return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}catch(Exception e) {
-			System.err.println("❌ Error inesperado");
+			Debugger.printErr("❌ Error inesperado");
 		}
     	return false;
     }

@@ -1,5 +1,6 @@
 package controller;
 
+import utils.Debugger;
 import utils.Session;
 import view.HomeView;
 
@@ -28,17 +29,17 @@ public class HomeController extends Controller{
 	public void goReserveGame() {
 		ReservationController reservationController = new ReservationController();
 		reservationController.startReservation1();
-	    System.out.println("Reserve game");
+	    Debugger.print("Reserve game");
 	}
 
 	// Ir a la ventana ViewReservations
 	public void goViewReservations() {
-	    System.out.println("View reservations");
+	    Debugger.print("View reservations");
 	}
 
 	// Ir a la ventana GameList
 	public void goGameList() {
-	    System.out.println("Game list");
+	    Debugger.print("Game list");
 	}
 
 	// Cerrar sesión y volver al login
