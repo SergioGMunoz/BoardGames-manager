@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AuthDAO {
+public class UserDAO {
 	Connection conn=ConnectionDB.getConnection();
 	
 	// Devuelve si el usuario y contraseña en la BBDD
@@ -94,5 +94,67 @@ public class AuthDAO {
 	    }
 	    return dataUser;
 	}
+	
+	public ArrayList <Object> getUserDataByID(int id) {
+		ArrayList<Object> dataUser = null;
+		String query = "SELECT \r\n"
+				+ "    name, mail, \r\n"
+				+ "    (SELECT COUNT(*) FROM RESERVATIONS WHERE id_user=?) AS games_played, \r\n"
+				+ "    (\r\n"
+				+ "        COALESCE((\r\n"
+				+ "            SELECT GAMES.name\r\n"
+				+ "            FROM RESERVATIONS \r\n"
+				+ "            JOIN GAMES ON RESERVATIONS.id_game = GAMES.id \r\n"
+				+ "            WHERE id_user=?\r\n"
+				+ "            GROUP BY id_game \r\n"
+				+ "            ORDER BY COUNT(*) DESC \r\n"
+				+ "            LIMIT 1\r\n"
+				+ "        ), '-')\r\n"
+				+ "    ) AS top_game, \r\n"
+				+ "    reg_date\r\n"
+				+ "FROM USERS \r\n"
+				+ "WHERE id=?;";
+		try{			
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setInt(1, id);
+			st.setInt(2, id);
+			st.setInt(3, id);
+			
+			ResultSet rs = st.executeQuery();
+			dataUser = new ArrayList();
+	        
+	        if (rs.next()) {
+	        	dataUser.add(rs.getString("name")); 
+	            dataUser.add(rs.getString("mail")); 
+	            dataUser.add(rs.getInt("games_played"));
+	            dataUser.add(rs.getString("top_game"));
+	            dataUser.add(rs.getDate("reg_date"));
+	        }
+			
+		}catch(SQLException e) {
+			System.err.println("❌ Error SQL al buscar user por id: " + id);
+	        e.printStackTrace();
+		}
+		return dataUser;
+	}
+	
+	public boolean updateUserNameByID(int id, String newUsername) {
+	    String sql = "UPDATE users SET name = ? WHERE id = ?";
+	    
+	    try {
+	    	PreparedStatement st = conn.prepareStatement(sql);
+	        st.setString(1, newUsername);
+	        st.setInt(2, id);
+
+	        int rowsUpdated = st.executeUpdate();
+	        return rowsUpdated > 0;
+
+	    } catch (SQLException e) {
+	        System.err.println("❌ Error SQL al actualizar el nombre de usuario id: " + id);
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 }

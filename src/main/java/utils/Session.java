@@ -85,5 +85,9 @@ public class Session {
 		return regDate;
 	}
 
+	public static void setName(String newName) {
+		name = newName;
+	}
+
    
 }

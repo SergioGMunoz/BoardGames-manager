@@ -1,6 +1,6 @@
 package controller;
 
-import model.AuthDAO;
+import model.UserDAO;
 
 import utils.PasswordUtils;
 import utils.Session;
@@ -13,13 +13,13 @@ import view.SignUpView;
 
 public class AuthController extends Controller{
 	LoginView loginView;
-	AuthDAO authDAO;
+	UserDAO authDAO;
 	SignUpView signUpView;
 
 	public AuthController() {
 		super();
 		this.loginView = new LoginView(this);
-		this.authDAO = new AuthDAO();
+		this.authDAO = new UserDAO();
 	}
 	
 	//Inicia la ventana de login
@@ -72,7 +72,7 @@ public class AuthController extends Controller{
 		// Validar name
 		try {
 			Validator.validateName(name);
-		} catch (EmptyFieldException | FieldMinMaxCharactersException e) {
+		} catch (EmptyFieldException | FieldMinMaxCharactersException | SameFieldException e) {
 			signUpView.showError("El nombre " + e.getMessage());
 			return;
 		}
@@ -80,7 +80,7 @@ public class AuthController extends Controller{
 		// Validar mail
 		try {
 			Validator.validateMail(mail);
-		} catch (EmptyFieldException | MailNotValidException | FieldMinMaxCharactersException e) {
+		} catch (EmptyFieldException | MailNotValidException | FieldMinMaxCharactersException | SameFieldException e) {
 			signUpView.showError("El mail " + e.getMessage());
 			return;
 		}
@@ -88,7 +88,7 @@ public class AuthController extends Controller{
 		// Validar password
 		try {
 			Validator.validatePassword(pwd);
-		} catch (EmptyFieldException | FieldMinMaxCharactersException e) {
+		} catch (EmptyFieldException | FieldMinMaxCharactersException | SameFieldException e) {
 			signUpView.showError("La contraseña " + e.getMessage());
 			return;
 		}
