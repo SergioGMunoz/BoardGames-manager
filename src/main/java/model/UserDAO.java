@@ -157,6 +157,22 @@ public class UserDAO {
 	        return false;
 	    }
 	}
+	
+	// Elimina el user de la BBDD y devuelve si lo ha conseguido
+	public boolean deleteUserByID(int id) {
+	    try {
+	    	String sql = "DELETE FROM users WHERE id = ?";
+	        PreparedStatement st = conn.prepareStatement(sql);
+	        st.setInt(1, id);
+	        return st.executeUpdate() > 0;
+
+	    } catch (SQLException e) {
+	        Debugger.printErr("❌ Error SQL al eliminar el usuario con id: " + id);
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 
 }
