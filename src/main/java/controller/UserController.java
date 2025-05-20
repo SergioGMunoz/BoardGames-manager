@@ -32,7 +32,7 @@ public class UserController extends Controller{
 	public String tryChangeName(String newName) {
 		try {
 			Validator.validateName(newName);
-			System.out.println("VALIDADO CORRECTO");
+			Debugger.print("VALIDADO CORRECTO");
 			userDAO.updateUserNameByID(Session.getId(), newName);
 			Session.setName(newName);
 			userProfileView.showSucess("Nombre actualizado con exito");
