@@ -59,15 +59,10 @@ public class GameDAO {
 	}
 
 	// Obtiene una lista de juegos segun los fitros aportados, si son null se ignoran
-	public ArrayList<Object[]> getFilteredGames(String name, Integer jugadores, String type, String orden, String[] dateFilters) {
+	public ArrayList<Object[]> getFilteredGames(String name, Integer jugadores, String type, String orden, String reservationDate, String timeStart) {
 	    ArrayList<Object[]> games = new ArrayList<>();
-	    
-	    // Verificar si hay filtros de fecha
-	    boolean reservationFiltersOn=false;
-	    if (dateFilters != null) {
-	    	reservationFiltersOn = (dateFilters.length >= 3);
-	    }
-	    
+	    boolean reservationFiltersOn = (reservationDate != null && timeStart != null);
+
 	    String query =
 	        "SELECT G.id, G.name, MIN(C.name) AS type, G.min_players, G.max_players, " +
 	        "G.duration, G.min_age, G.src_img " +
@@ -79,12 +74,12 @@ public class GameDAO {
 	        query += "LEFT JOIN RESERVATIONS R ON G.id = R.id_game ";
 	    }
 
-	    // Excluye juegos reservados en esa fecha y hora
 	    if (reservationFiltersOn) {
-	    	Debugger.print("Aplicando filtros de reserva");
+	        Debugger.print("Aplicando filtros de reserva");
 	        query += "WHERE G.id NOT IN ( " +
 	                 "SELECT id_game FROM RESERVATIONS " +
-	                 "WHERE reservation_date = ? AND NOT (time_end <= ? OR time_start >= ?) " +
+	                 "WHERE reservation_date = ? " +
+	                 "AND NOT (time_end <= ? OR time_start >= LEAST(ADDTIME(?, G.duration), '22:00:00')) " +
 	                 ") ";
 	    } else {
 	        query += "WHERE 1=1 ";
@@ -127,13 +122,12 @@ public class GameDAO {
 
 	    try {
 	        PreparedStatement st = conn.prepareStatement(query);
-	        // Indice del parametro a cambiar
 	        int index = 1;
 
 	        if (reservationFiltersOn) {
-	            st.setString(index++, dateFilters[0]);   // date
-	            st.setString(index++, dateFilters[1]);   // Time start
-	            st.setString(index++, dateFilters[2]);   // Time end
+	            st.setString(index++, reservationDate);
+	            st.setString(index++, timeStart);
+	            st.setString(index++, timeStart); 
 	        }
 
 	        if (name != null && !name.isEmpty()) {
@@ -174,7 +168,6 @@ public class GameDAO {
 
 	    return games;
 	}
-
 
 
 }

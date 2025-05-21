@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import model.GameDAO;
+import model.Reservation;
 import utils.Debugger;
 import view.GameTable;
 import view.GamesListView;
@@ -30,6 +31,7 @@ public class GameController extends Controller{
 	    String[] playersArray = players.toArray(new String[0]);
 
 		this.gamesListView = new GamesListView(this, gameTable, categoriesArray,playersArray, orderValues);
+		gamesListView.setModeReservation(reservationMode);
 	}
 	
 	// Muestra la pantalla listado de juegos sin aplicar filtros
@@ -37,9 +39,10 @@ public class GameController extends Controller{
 		gamesListView.clearFiltersFields();
 		if(reservationMode) {
 			System.out.println("Aplicando juegos con restiricciones fecha");
-			gameTable.updateGames(gameDAO.getFilteredGames(null, null, null, orderValues[0], getDateFilters()));
+			gameTable.updateGames(gameDAO.getFilteredGames(null, null, null, orderValues[0], 
+					Reservation.getReservationDate(),Reservation.getTimeStart()));
 		}else {
-			gameTable.updateGames(gameDAO.getFilteredGames(null, null, null, orderValues[0], null));
+			gameTable.updateGames(gameDAO.getFilteredGames(null, null, null, orderValues[0], null, null));
 		}
 		setView(gamesListView);
 	}
@@ -72,9 +75,10 @@ public class GameController extends Controller{
 		
 		if(reservationMode) {
 			System.out.println("Aplicando juegos con restiricciones fecha");
-			gameTable.updateGames(gameDAO.getFilteredGames(name, players, category, order, getDateFilters()));
+			gameTable.updateGames(gameDAO.getFilteredGames(name, players, category, order,
+					Reservation.getReservationDate(),Reservation.getTimeStart()));
 		}else {
-			gameTable.updateGames(gameDAO.getFilteredGames(name, players, category, order, null));
+			gameTable.updateGames(gameDAO.getFilteredGames(name, players, category, order, null,null));
 		}
 		
 	}
@@ -85,19 +89,6 @@ public class GameController extends Controller{
 		homeController.startHome();
 	}
 	
-	// Recoger Filtros de fecha
-	public String []  getDateFilters() {
-		
-		if (!reservationMode) {
-			return null;
-		}
-		
-		String [] dateFilters = new String [3];
-		
-		//Completar aqui recogiendo la info
-		
-		return dateFilters;
-	}
 	
 	
 }

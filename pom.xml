@@ -12,5 +12,11 @@
 	        <artifactId>mysql-connector-java</artifactId>
 	        <version>8.0.33</version>
 	    </dependency>
+	    <!-- JCalendar -->
+	    <dependency>
+		    <groupId>com.toedter</groupId>
+		    <artifactId>jcalendar</artifactId>
+		    <version>1.4</version>
+		</dependency>
   </dependencies>
 </project>

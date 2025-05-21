@@ -1229,3 +1229,5 @@ INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_
 (2, 1, 3, '2024-06-01', '16:00:00', '17:30:00'),   -- Arnak
 (2, 4, 4, '2024-06-04', '19:00:00', '19:45:00'),   -- Código Secreto
 (2, 8, 5, '2024-06-05', '21:00:00', '21:30:00');   -- Hitster
+
+SELECT * FROM reservations;

@@ -14,9 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controller.GameController;
+import controller.HomeController;
 import utils.Debugger;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class GamesListView extends JPanel {
     private JLabel lbTitle;
@@ -132,7 +131,7 @@ public class GamesListView extends JPanel {
         
         // Boton aplicar filtros actualiza lista
         btnFilter.addActionListener(e -> gameController.updateGameList());
-        btnHome.addActionListener(e -> gameController.goHome());
+        btnHome.addActionListener(e -> HomeController.goHome());
         
         
     }

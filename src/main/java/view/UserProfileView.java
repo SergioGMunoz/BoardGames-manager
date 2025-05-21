@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import controller.HomeController;
 import controller.UserController;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -88,7 +89,7 @@ public class UserProfileView extends JPanel implements ErrorDisplayable{
 	}
 	
 	private void pressHome() {
-		userController.goHome();
+		HomeController.goHome();
 	}
 	
 	public void init() {

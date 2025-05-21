@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDateTime;
+
 public class Reservation {
     private static int userId;
     private static int gameId;
@@ -43,6 +45,16 @@ public class Reservation {
     }
 
     // Setters
+    public static void setDateTime(LocalDateTime dateTime) {
+        if (dateTime == null) return;
+
+        Reservation.reservationDate = dateTime.toLocalDate().toString();
+        
+        // Enlace investigación: https://es.stackoverflow.com/questions/169527/formatear-localtime
+        // Añade el tiempo de inicio
+        Reservation.timeStart = dateTime.toLocalTime().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
+    
     public static void setUserId(int userId) {
         Reservation.userId = userId;
     }
@@ -65,9 +77,5 @@ public class Reservation {
 
     public static void setTimeEnd(String timeEnd) {
         Reservation.timeEnd = timeEnd;
-    }
-
-    public static String[] getReservationDateData() {
-        return new String[] { reservationDate, timeStart, timeEnd };
     }
 }
