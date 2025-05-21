@@ -1,0 +1,73 @@
+package model;
+
+public class Reservation {
+    private static int userId;
+    private static int gameId;
+    private static int numPlayers;
+    private static String reservationDate; 
+    private static String timeStart;     
+    private static String timeEnd;   
+    
+    public static void clearReservation() {
+        userId = 0;
+        gameId = 0;
+        numPlayers = 0;
+        reservationDate = null;
+        timeStart = null;
+        timeEnd = null;
+    }
+
+    // Getters
+    public static int getUserId() {
+        return userId;
+    }
+
+    public static int getGameId() {
+        return gameId;
+    }
+
+    public static int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public static String getReservationDate() {
+        return reservationDate;
+    }
+
+    public static String getTimeStart() {
+        return timeStart;
+    }
+
+    public static String getTimeEnd() {
+        return timeEnd;
+    }
+
+    // Setters
+    public static void setUserId(int userId) {
+        Reservation.userId = userId;
+    }
+
+    public static void setGameId(int gameId) {
+        Reservation.gameId = gameId;
+    }
+
+    public static void setNumPlayers(int numPlayers) {
+        Reservation.numPlayers = numPlayers;
+    }
+
+    public static void setReservationDate(String reservationDate) {
+        Reservation.reservationDate = reservationDate;
+    }
+
+    public static void setTimeStart(String timeStart) {
+        Reservation.timeStart = timeStart;
+    }
+
+    public static void setTimeEnd(String timeEnd) {
+        Reservation.timeEnd = timeEnd;
+    }
+
+    public static String[] getReservationDateData() {
+        return new String[] { reservationDate, timeStart, timeEnd };
+    }
+}
