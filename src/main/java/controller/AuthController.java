@@ -1,14 +1,14 @@
 package controller;
 
 import model.UserDAO;
-
 import utils.PasswordUtils;
 import utils.Session;
-import utils.exceptions.*;
 import utils.Validator;
-
+import utils.exceptions.EmptyFieldException;
+import utils.exceptions.FieldMinMaxCharactersException;
+import utils.exceptions.MailNotValidException;
+import utils.exceptions.SameFieldException;
 import view.LoginView;
-import view.MainView;
 import view.SignUpView;
 
 public class AuthController extends Controller{

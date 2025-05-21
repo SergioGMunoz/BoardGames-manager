@@ -1,6 +1,19 @@
 package utils;
 
-import utils.exceptions.*;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
+
+import utils.exceptions.EmptyFieldException;
+import utils.exceptions.EmptyReservationFieldException;
+import utils.exceptions.FieldMinMaxCharactersException;
+import utils.exceptions.InvalidDateTimeFormatException;
+import utils.exceptions.MailNotValidException;
+import utils.exceptions.NotFutureDateException;
+import utils.exceptions.SameFieldException;
+import utils.exceptions.ShopNotOpenException;
 
 public class Validator {
 
@@ -57,4 +70,30 @@ public class Validator {
         	throw new SameFieldException();
         }
     }
+    
+    // Validador de fecha y hora
+    public static void validateDateTime(LocalDateTime dateTime)
+            throws InvalidDateTimeFormatException, NotFutureDateException, ShopNotOpenException, EmptyReservationFieldException {
+
+        if (dateTime == null) {
+            throw new EmptyReservationFieldException();
+        }
+
+        // Fecha no puede ser pasada
+        if (dateTime.isBefore(LocalDateTime.now())) {
+            throw new NotFutureDateException();
+        }
+
+        // Validar hora dentro del horario tienda
+        LocalTime time = dateTime.toLocalTime();
+        
+        if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(21, 59))) {
+            throw new ShopNotOpenException();
+        }
+
+    }
+
+
+
+
 }

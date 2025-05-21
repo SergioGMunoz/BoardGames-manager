@@ -1218,10 +1218,13 @@ INSERT INTO GAME_CATEGORY (id_game, id_category) VALUES
 (17, 1),  -- Uno - Cartas
 (17, 4),  -- Uno - Infantil
 (18, 3);  -- Wingspan - Estrategia
+
+
+
 -- Reservas para user con id=2 (admin)
 INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) VALUES
 (2, 2, 4, '2024-06-01', '18:00:00', '19:15:00'),   -- Catan
-(2, 2, 3, '2024-06-02', '20:00:00', '21:00:00'),   -- Cthulhu
+(2, 2, 3, '2024-06-02', '20:00:00', '21:00:00'),   -- Catan
 (2, 12, 2, '2024-06-03', '17:00:00', '18:30:00');  -- Root
 
 -- Otras reservas para otros usuarios (ejemplo para user id=1)
@@ -1230,3 +1233,19 @@ INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_
 (2, 4, 4, '2024-06-04', '19:00:00', '19:45:00'),   -- Código Secreto
 (2, 8, 5, '2024-06-05', '21:00:00', '21:30:00');   -- Hitster
 
+-- Reservas para validar reservas ocupadas
+-- Reservas del admin (id_user = 1) para juegos distintos los días 30 y 31 de mayo
+INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) VALUES
+(2, 3, 2, '2025-05-30', '15:00:00', '16:00:00'),   -- Azul
+(2, 5, 4, '2025-05-30', '16:30:00', '17:15:00'),   -- Dixit
+(2, 6, 3, '2025-05-30', '18:00:00', '19:00:00'),   -- 7 Wonders
+
+(2, 7, 4, '2025-05-31', '15:30:00', '16:15:00'),   -- Sushi Go
+(2, 9, 2, '2025-05-31', '17:00:00', '18:00:00'),   -- Carcassonne
+(2, 10, 3, '2025-05-31', '19:00:00', '20:00:00');  -- Dixit Odyssey
+
+INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) VALUES
+(1, 2, 4, '2025-05-29', '10:00:00', '20:00:00'),
+(1, 2, 4, '2025-05-28', '15:00:00', '20:00:00');
+
+SELECT * FROM users;

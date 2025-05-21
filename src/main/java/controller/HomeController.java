@@ -13,6 +13,12 @@ public class HomeController extends Controller{
 		this.homeView = new HomeView(this);
 	}
 	
+	// Vuelve a la ventana de home
+	public static void goHome() {
+		HomeController homeController = new HomeController();
+		homeController.startHome();
+	}
+	
 	// Muestra la vista de home
 	public void startHome() {
 		homeView.clearMsg();
@@ -28,7 +34,7 @@ public class HomeController extends Controller{
 	// Ir a la ventana ReserveGame
 	public void goReserveGame() {
 		ReservationController reservationController = new ReservationController();
-		reservationController.startReservation1();
+		reservationController.startReservation();
 	    Debugger.print("Reserve game");
 	}
 
@@ -39,7 +45,7 @@ public class HomeController extends Controller{
 
 	// Ir a la ventana GameList
 	public void goGameList() {
-	    GameController gameController = new GameController();
+	    GameController gameController = new GameController(false);
 	    gameController.startGameList();
 	    
 	}

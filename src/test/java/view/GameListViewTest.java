@@ -14,7 +14,7 @@ public class GameListViewTest {
 		if (ConnectionDB.connect("JavaDev", "Java12345", "localhost", "3306", "board_games_db")) {
 			
 			// Instanciar controlladores 
-			GameController gc = new GameController();
+			GameController gc = new GameController(false);
 			gc.startGameList();
 
 		}
