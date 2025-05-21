@@ -39,7 +39,7 @@ public class HomeController extends Controller{
 
 	// Ir a la ventana GameList
 	public void goGameList() {
-	    GameController gameController = new GameController();
+	    GameController gameController = new GameController(false);
 	    gameController.startGameList();
 	    
 	}

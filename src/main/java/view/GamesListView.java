@@ -32,6 +32,8 @@ public class GamesListView extends JPanel {
     private String [] categories;
     private String [] players;
     private String [] order;
+    private JButton btnContinue;
+    private JButton btnBack;
     
     public GamesListView(GameController gameController, GameTable gameTable, String [] categories, String [] players, String [] order) {
     	this.gameController = gameController;
@@ -64,6 +66,17 @@ public class GamesListView extends JPanel {
     
     public String getNameText() {
         return tfName.getText();
+    }
+    
+    public void setModeReservation(boolean on) {
+    	if(on) {
+    		lbTitle.setText("Seleciona un juego");
+    		add(btnContinue);
+    		add(btnBack);
+    	}else {
+    		lbTitle.setText("Nuestros juegos");
+    		add(btnHome);
+    	}
     }
 
     private void init() {
@@ -107,7 +120,15 @@ public class GamesListView extends JPanel {
         btnHome = new JButton("Ir a Inicio");
         btnHome.setFont(new Font("Tahoma", Font.PLAIN, 11));
         btnHome.setBounds(271, 388, 100, 22);
-        add(btnHome);
+        
+        btnBack = new JButton("Volver");
+        btnBack.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnBack.setBounds(147, 389, 100, 22);
+        
+        btnContinue = new JButton("Continuar");
+        btnContinue.setEnabled(false);
+        btnContinue.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnContinue.setBounds(397, 389, 100, 22);
         
         // Boton aplicar filtros actualiza lista
         btnFilter.addActionListener(e -> gameController.updateGameList());
@@ -115,5 +136,4 @@ public class GamesListView extends JPanel {
         
         
     }
-
 }

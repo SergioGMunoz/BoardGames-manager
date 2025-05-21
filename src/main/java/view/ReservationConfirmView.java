@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ReservationStep3View extends JPanel {
+public class ReservationConfirmView extends JPanel {
     private JLabel lbTitle;
     private JTextField tfPlayers;
     private JTextField tfDay;
@@ -15,7 +15,7 @@ public class ReservationStep3View extends JPanel {
     private JButton btnBack;
     private JButton btnCancel;
 
-    public ReservationStep3View() {
+    public ReservationConfirmView() {
         setLayout(null);
         setBackground(new Color(204, 255, 235));
 

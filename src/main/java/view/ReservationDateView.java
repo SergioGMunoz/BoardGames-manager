@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ReservationStep1View extends JPanel {
+public class ReservationDateView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class ReservationStep1View extends JPanel {
 	private JButton btnNext;
 	private JLabel lbError;
 
-	public ReservationStep1View() {
+	public ReservationDateView() {
 		setLayout(null);
 		setBackground(new Color(204, 255, 235));
 

@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 import utils.Debugger;
 
@@ -56,12 +58,16 @@ public class GameDAO {
 	    return numbers;
 	}
 
-	
 	// Obtiene una lista de juegos segun los fitros aportados, si son null se ignoran
-	public ArrayList<Object[]> getFilteredGames(String name, Integer jugadores, String type, String orden) {
+	public ArrayList<Object[]> getFilteredGames(String name, Integer jugadores, String type, String orden, String[] dateFilters) {
 	    ArrayList<Object[]> games = new ArrayList<>();
-
-	    // Query base
+	    
+	    // Verificar si hay filtros de fecha
+	    boolean reservationFiltersOn=false;
+	    if (dateFilters != null) {
+	    	reservationFiltersOn = (dateFilters.length >= 3);
+	    }
+	    
 	    String query =
 	        "SELECT G.id, G.name, MIN(C.name) AS type, G.min_players, G.max_players, " +
 	        "G.duration, G.min_age, G.src_img " +
@@ -69,12 +75,21 @@ public class GameDAO {
 	        "LEFT JOIN GAME_CATEGORY GC ON G.id = GC.id_game " +
 	        "LEFT JOIN CATEGORIES C ON GC.id_category = C.id ";
 
-	    // JOIN adicional si es "Más Jugados"
 	    if ("Más Jugados".equals(orden)) {
 	        query += "LEFT JOIN RESERVATIONS R ON G.id = R.id_game ";
 	    }
 
-	    query += "WHERE 1=1 ";
+	    // Excluye juegos reservados en esa fecha y hora
+	    if (reservationFiltersOn) {
+	    	Debugger.print("Aplicando filtros de reserva");
+	        query += "WHERE G.id NOT IN ( " +
+	                 "SELECT id_game FROM RESERVATIONS " +
+	                 "WHERE reservation_date = ? AND NOT (time_end <= ? OR time_start >= ?) " +
+	                 ") ";
+	    } else {
+	        query += "WHERE 1=1 ";
+	        Debugger.print("Sin aplicar filtros de reserva");
+	    }
 
 	    if (name != null && !name.isEmpty()) {
 	        query += "AND G.name LIKE ? ";
@@ -88,10 +103,8 @@ public class GameDAO {
 	        query += "AND C.name = ? ";
 	    }
 
-	    // Añadir GROUP BY obligatorio para evitar errores con ONLY_FULL_GROUP_BY
 	    query += "GROUP BY G.id, G.name, G.min_players, G.max_players, G.duration, G.min_age, G.src_img ";
 
-	    // Añadir ORDER BY según filtro
 	    if (orden != null) {
 	        switch (orden) {
 	            case "Más Jugados":
@@ -114,20 +127,28 @@ public class GameDAO {
 
 	    try {
 	        PreparedStatement st = conn.prepareStatement(query);
+	        // Indice del parametro a cambiar
 	        int index = 1;
+
+	        if (reservationFiltersOn) {
+	            st.setString(index++, dateFilters[0]);   // date
+	            st.setString(index++, dateFilters[1]);   // Time start
+	            st.setString(index++, dateFilters[2]);   // Time end
+	        }
 
 	        if (name != null && !name.isEmpty()) {
 	            st.setString(index++, "%" + name + "%");
 	        }
+
 	        if (jugadores != null) {
 	            st.setInt(index++, jugadores);
 	            st.setInt(index++, jugadores);
 	        }
+
 	        if (type != null && !type.isEmpty()) {
 	            st.setString(index++, type);
 	        }
 
-	        Debugger.print("Haciendo inserción con filtros...");
 	        Debugger.print("QUERY:");
 	        Debugger.print(query);
 
@@ -145,6 +166,7 @@ public class GameDAO {
 	            };
 	            games.add(row);
 	        }
+
 	    } catch (SQLException e) {
 	        Debugger.printErr("Error SQL al buscar juegos con filtros");
 	        e.printStackTrace();
