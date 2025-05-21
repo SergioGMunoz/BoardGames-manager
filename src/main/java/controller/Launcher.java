@@ -9,7 +9,7 @@ public class Launcher {
 	public static void main(String[] args) {
 		
 		// Establece si se imprimen mensajes de Debug
-		Debugger.setDebug(true);
+		Debugger.setDebug(false);
 		
 		// Iniciar BBDD
 		if (ConnectionDB.connect("JavaDev", "Java12345", "localhost", "3306", "board_games_db")) {
