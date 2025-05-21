@@ -1248,4 +1248,14 @@ INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_
 (1, 2, 4, '2025-05-29', '10:00:00', '20:00:00'),
 (1, 2, 4, '2025-05-28', '15:00:00', '20:00:00');
 
-SELECT * FROM users;
+SELECT * FROM reservations;
+SELECT * FROM RESERVATIONS
+WHERE id_user = 2
+AND reservation_date = '2025-05-30'
+AND ('15:30:00' < time_end AND '14:30:00' > time_start);
+
+SELECT * FROM RESERVATIONS
+WHERE id_user = 2
+AND reservation_date = '2025-05-30'
+AND (time_start < '15:30:00' AND time_end > '14:30:00');
+

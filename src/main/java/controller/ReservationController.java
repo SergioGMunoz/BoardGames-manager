@@ -6,7 +6,6 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.Reservation;
 import model.ReservationDAO;
@@ -20,18 +19,21 @@ import utils.exceptions.NotFutureDateException;
 import utils.exceptions.ShopNotOpenException;
 import view.ReservationConfirmView;
 import view.ReservationDataView;
+import view.ReservationsListView;
 
 public class ReservationController extends Controller {
 	private ReservationDataView reservationDataView;
 	private ReservationDAO reservationDAO;
 	private GameController gameController;
 	private ReservationConfirmView reservationConfirmView;
+	private ReservationsListView reservationListView;
 	
 	public ReservationController() {
 		this.reservationDataView = new ReservationDataView(this);
 		this.reservationDAO = new ReservationDAO();
 	}
-
+	
+	// Muestra la ventana del primer paso de las reservas
 	public void startReservation() {
 		reservationDataView.clearMsg();
 		Reservation.clearReservation();
@@ -73,12 +75,14 @@ public class ReservationController extends Controller {
 		goStep2();
 	}
 	
+	// Muestra la segunda ventana de los pasos de la reserva
 	public void goStep2() {
 		Debugger.print("Reserva paso 2");
 		this.gameController = new GameController(true);
 		gameController.startGameList();
 	}
 
+	// Muestra la ventana de confirmación de la reserva
 	public void startReservationConfirm() {
 		this.reservationConfirmView = new ReservationConfirmView(this);
 		reservationConfirmView.setFields(Reservation.getGameName(), Session.getName(), Reservation.getAllData());
@@ -140,6 +144,28 @@ public class ReservationController extends Controller {
 
 	}
 
+	// Metodo que muestra la pantalla de listado de reservas
+	public void startReservationList() {
+		this.reservationListView = new ReservationsListView(this);
+		reservationListView.updateTable(reservationDAO.getAllFutureReservationsByUserID(Session.getId()));
+		setView(reservationListView);
+	}
+	
+	// Elimina la reserva selecionada de la lista
+	public void deleteReservation() {
+		Integer id = reservationListView.getSelectedReservationId();
+		if ( id == null) {
+			Debugger.printErr("Error id es null");
+			return;
+		}
+		
+		if (reservationDAO.deleteReservationById(id)) {
+		    Debugger.print("✅ Reserva eliminada");
+		    reservationListView.updateTable(reservationDAO.getAllFutureReservationsByUserID(Session.getId()));
+		} else {
+		   Debugger.printErr("No se pudo eliminar");
+		}		
+	}
 }
 
 	

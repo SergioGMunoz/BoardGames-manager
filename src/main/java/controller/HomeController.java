@@ -40,7 +40,8 @@ public class HomeController extends Controller{
 
 	// Ir a la ventana ViewReservations
 	public void goViewReservations() {
-	    Debugger.print("View reservations");
+		ReservationController reservationController = new ReservationController();
+		reservationController.startReservationList();
 	}
 
 	// Ir a la ventana GameList
