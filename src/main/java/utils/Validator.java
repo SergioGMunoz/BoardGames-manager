@@ -79,22 +79,18 @@ public class Validator {
             throw new EmptyReservationFieldException();
         }
 
-        try {
-            // Fecha no puede ser pasada
-            if (dateTime.isBefore(LocalDateTime.now())) {
-                throw new NotFutureDateException();
-            }
-
-            // Validar hora dentro del horario tienda
-            LocalTime time = dateTime.toLocalTime();
-            
-            if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(21, 59))) {
-                throw new ShopNotOpenException();
-            }
-
-        } catch (Exception e) {
-            throw new InvalidDateTimeFormatException();
+        // Fecha no puede ser pasada
+        if (dateTime.isBefore(LocalDateTime.now())) {
+            throw new NotFutureDateException();
         }
+
+        // Validar hora dentro del horario tienda
+        LocalTime time = dateTime.toLocalTime();
+        
+        if (time.isBefore(LocalTime.of(10, 0)) || time.isAfter(LocalTime.of(21, 59))) {
+            throw new ShopNotOpenException();
+        }
+
     }
 
 

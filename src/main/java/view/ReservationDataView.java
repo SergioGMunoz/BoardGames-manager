@@ -18,6 +18,8 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.HomeController;
 import controller.ReservationController;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 
 public class ReservationDataView extends JPanel implements ErrorDisplayable {
@@ -49,6 +51,7 @@ public class ReservationDataView extends JPanel implements ErrorDisplayable {
     
     private void updateBtnNext() {
     	btnNext.setEnabled(spDay.getDate() != null);
+    	clearMsg();
     }
     
     // Getters para datos de los campos
@@ -146,6 +149,9 @@ public class ReservationDataView extends JPanel implements ErrorDisplayable {
         spDay.getDateEditor().addPropertyChangeListener("date", evt -> {
             updateBtnNext();
         });
+        
+        spHour.addChangeListener(e -> clearMsg());
+        spMinute.addChangeListener(e -> clearMsg());
     }
 
 }

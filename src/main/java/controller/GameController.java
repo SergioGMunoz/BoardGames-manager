@@ -39,8 +39,8 @@ public class GameController extends Controller{
 		gamesListView.clearFiltersFields();
 		if(reservationMode) {
 			System.out.println("Aplicando juegos con restiricciones fecha");
-			gameTable.updateGames(gameDAO.getFilteredGames(null, null, null, orderValues[0], 
-					Reservation.getReservationDate(),Reservation.getTimeStart()));
+			gameTable.updateGames(gameDAO.getFilteredGames(null, Reservation.getNumPlayers(), 
+					null, orderValues[0], Reservation.getReservationDate(),Reservation.getTimeStart()));
 		}else {
 			gameTable.updateGames(gameDAO.getFilteredGames(null, null, null, orderValues[0], null, null));
 		}
@@ -71,11 +71,11 @@ public class GameController extends Controller{
 
 		String order = gamesListView.getSelectedOrder(); 
 		
-		Debugger.print("Filtros aplicados:" + name + players + category + order);
 		
 		if(reservationMode) {
+			Debugger.print("Filtros aplicados:" + name  + category + order);
 			System.out.println("Aplicando juegos con restiricciones fecha");
-			gameTable.updateGames(gameDAO.getFilteredGames(name, players, category, order,
+			gameTable.updateGames(gameDAO.getFilteredGames(name, Reservation.getNumPlayers(), category, order,
 					Reservation.getReservationDate(),Reservation.getTimeStart()));
 		}else {
 			gameTable.updateGames(gameDAO.getFilteredGames(name, players, category, order, null,null));
@@ -88,7 +88,20 @@ public class GameController extends Controller{
 		HomeController homeController = new HomeController();
 		homeController.startHome();
 	}
+
+	// Botones cuando esta en reservation mode
+	public void goReservation() {
+		ReservationController reservationController = new ReservationController();
+		reservationController.startReservation();
+	}
 	
+	public void tryGoNext() {
+		System.out.println("Intentando ir a Reservation parte 3");
+	}
+	
+	public void goNexr() {
+		System.out.println("Moviendonos a reservation parte 3");
+	}
 	
 	
 }

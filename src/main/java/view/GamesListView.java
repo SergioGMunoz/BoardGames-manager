@@ -75,6 +75,7 @@ public class GamesListView extends JPanel {
     	}else {
     		lbTitle.setText("Nuestros juegos");
     		add(btnHome);
+    		add(cbPlayers);
     	}
     }
 
@@ -95,7 +96,6 @@ public class GamesListView extends JPanel {
         cbPlayers = new JComboBox<>();
         cbPlayers.setModel(new DefaultComboBoxModel<>(players));
         cbPlayers.setBounds(220, 70, 130, 22);
-        add(cbPlayers);
 
         cbCategory = new JComboBox<>();
         cbCategory.setModel(new DefaultComboBoxModel<>(categories));
@@ -133,6 +133,8 @@ public class GamesListView extends JPanel {
         btnFilter.addActionListener(e -> gameController.updateGameList());
         btnHome.addActionListener(e -> HomeController.goHome());
         
+        btnBack.addActionListener(e -> gameController.goReservation());
+        btnContinue.addActionListener(e -> gameController.tryGoNext());
         
     }
 }
