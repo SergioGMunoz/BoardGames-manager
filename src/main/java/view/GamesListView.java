@@ -15,10 +15,12 @@ import javax.swing.SwingConstants;
 
 import controller.GameController;
 import utils.Debugger;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GamesListView extends JPanel {
     private JLabel lbTitle;
-    private JTextField tfSearch;
+    private JTextField tfName;
     private JComboBox<String> cbPlayers;
     private JComboBox<String> cbCategory;
     private JComboBox<String> cbOrder;
@@ -47,6 +49,22 @@ public class GamesListView extends JPanel {
     public void clearFiltersFields() {
     	Debugger.print("Limpiando campos filtros");
     }
+    
+    public String getSelectedPlayers() {
+        return (String) cbPlayers.getSelectedItem();
+    }
+
+    public String getSelectedCategory() {
+        return (String) cbCategory.getSelectedItem();
+    }
+
+    public String getSelectedOrder() {
+        return (String) cbOrder.getSelectedItem();
+    }
+    
+    public String getNameText() {
+        return tfName.getText();
+    }
 
     private void init() {
         setLayout(null);
@@ -58,9 +76,9 @@ public class GamesListView extends JPanel {
         lbTitle.setBounds(0, 20, 640, 30);
         add(lbTitle);
 
-        tfSearch = new JTextField();
-        tfSearch.setBounds(40, 70, 160, 22);
-        add(tfSearch);
+        tfName = new JTextField();
+        tfName.setBounds(40, 70, 160, 22);
+        add(tfName);
 
         cbPlayers = new JComboBox<>();
         cbPlayers.setModel(new DefaultComboBoxModel<>(players));
@@ -90,6 +108,12 @@ public class GamesListView extends JPanel {
         btnHome.setFont(new Font("Tahoma", Font.PLAIN, 11));
         btnHome.setBounds(271, 388, 100, 22);
         add(btnHome);
+        
+        // Boton aplicar filtros actualiza lista
+        btnFilter.addActionListener(e -> gameController.updateGameList());
+        btnHome.addActionListener(e -> gameController.goHome());
+        
+        
     }
 
 }

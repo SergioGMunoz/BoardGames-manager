@@ -39,7 +39,8 @@ public class HomeController extends Controller{
 
 	// Ir a la ventana GameList
 	public void goGameList() {
-	    Debugger.print("Ir a Game list");
+	    GameController gameController = new GameController();
+	    gameController.startGameList();
 	    
 	}
 

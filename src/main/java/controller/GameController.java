@@ -16,6 +16,7 @@ public class GameController extends Controller{
 	public GameController() {
 		// Añadir filtros por defecto
 		this.gameTable = new GameTable(); 
+		this.gameDAO = new GameDAO();
 		
 		// Obtener lista de categorías 
 		ArrayList<String> categories = gameDAO.getAllCategories();
@@ -27,9 +28,7 @@ public class GameController extends Controller{
 	    players.add(0, "Cualquiera");
 	    String[] playersArray = players.toArray(new String[0]);
 
-		this.gamesListView = new GamesListView(this, null, categoriesArray,playersArray, orderValues);
-
-		this.gameDAO = new GameDAO();
+		this.gamesListView = new GamesListView(this, gameTable, categoriesArray,playersArray, orderValues);
 	}
 	
 	// Muestra la pantalla listado de juegos sin aplicar filtros
@@ -39,8 +38,40 @@ public class GameController extends Controller{
 		setView(gamesListView);
 	}
 	
+	// Actualiza el contenido de la tabla de juegos segun los filtros
 	public void updateGameList() {
 		Debugger.print("Aplicando filtros...");
-		//Seguir por aqui con validaciones y mierdas
+		
+		String name = gamesListView.getNameText();
+		if (name.trim().length()<=0) name = null;
+		
+		String category = gamesListView.getSelectedCategory();
+		if ("Cualquiera".equals(category)) category = null;
+
+		String playersStr = gamesListView.getSelectedPlayers();
+		Integer players = null;
+		
+		try {
+		    if (!"Cualquiera".equals(playersStr)) {
+		        players = Integer.parseInt(playersStr);
+		    }
+		} catch (Exception e) {
+		    Debugger.printErr("Error al convertir jugadores: " + playersStr);
+		    e.printStackTrace();
+		}
+
+		String order = gamesListView.getSelectedOrder(); 
+		
+		Debugger.print("Filtros aplicados:" + name + players + category + order);
+		gameTable.updateGames(gameDAO.getFilteredGames(name, players, category, order));
+		
 	}
+	
+	// Vuelve a la ventana de home
+	public void goHome() {
+		HomeController homeController = new HomeController();
+		homeController.startHome();
+	}
+	
+	
 }
