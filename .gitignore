@@ -23,17 +23,17 @@ Thumbs.db
 # Logs
 *.log
 
-# Archivos personales temporales
+# Archivos temporales
 *.iml
 *.swp
 *.bak
 *~
 
-# IDEs (opcional)
+# IDEs 
 .idea/
 *.ipr
 *.iws
 
-# Java compilados
+# Java archivos  compilados
 *.class
 >>>>>>> branch 'main' of https://github.com/SergioGMunoz/BoardGames-manager.git
