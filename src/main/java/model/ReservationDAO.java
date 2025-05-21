@@ -65,6 +65,36 @@ public class ReservationDAO {
 	    return false;
 	}
 	
+	//Metodo que inserta la reserva y devuelve si ha sido insertada correctamente
+	public boolean insertReservation(Object[] data) {
+		if (data == null || data.length < 6) {
+			Debugger.printErr("No hay datos suficientes para la inserción");
+	        return false;
+	    }
+
+	    String sql = "INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) " +
+	                 "VALUES (?, ?, ?, ?, ?, ?)";
+
+	    try {
+	    	PreparedStatement st = conn.prepareStatement(sql);
+	        st.setInt(1, (int) data[0]);           
+	        st.setInt(2, (int) data[1]);           
+	        st.setInt(3, (int) data[2]);            
+	        st.setDate(4, java.sql.Date.valueOf((String) data[3]));  
+	        st.setTime(5, java.sql.Time.valueOf((String) data[4]));  
+	        st.setTime(6, java.sql.Time.valueOf((String) data[5]));
+
+	        int rowsAffected = st.executeUpdate();
+	        return rowsAffected > 0;
+
+	    } catch (SQLException e) {
+	        Debugger.printErr("Error al insertar una reserva en la base de datos");
+	        e.printStackTrace();
+	        return false;
+	    }
+		
+	}
+	
 	
 
 

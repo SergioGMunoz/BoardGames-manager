@@ -109,14 +109,16 @@ public class GameController extends Controller{
 			 return;
 		} 
 		
-		Integer idGame = (Integer) gameTable.getValueAt(selectedRow, 0); 
-		Reservation.setGameId(idGame);
-		Debugger.print("Juego selecionado id -> " + idGame);
+		Integer gameID = (Integer) gameTable.getValueAt(selectedRow, 0); 
+		String gameName = (String) gameTable.getValueAt(selectedRow, 1); 
+		Reservation.setGameId(gameID);
+		Reservation.setGameName(gameName);
+		Debugger.print("Juego selecionado id -> " + gameID);
 		
 		// Recoger los datos de tiempo
 	    LocalTime startTime = LocalTime.parse(Reservation.getTimeStart()); 
 	    // Convertir duración a minutos
-	    LocalTime duration = LocalTime.parse(gameDAO.getGameDurationByID(idGame));      
+	    LocalTime duration = LocalTime.parse(gameDAO.getGameDurationByID(gameID));      
 	    Duration dur = Duration.between(LocalTime.MIN, duration);
 
 	    // Calcular tiempo terminar
@@ -145,6 +147,8 @@ public class GameController extends Controller{
 	
 	public void goNexr() {
 		System.out.println("Moviendonos a reservation parte 3");
+		ReservationController reservationController = new ReservationController();
+		reservationController.startReservationConfirm();
 	}
 	
 	

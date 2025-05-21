@@ -1,6 +1,9 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import utils.Debugger;
 
 public class Reservation {
     private static int userId;
@@ -8,7 +11,8 @@ public class Reservation {
     private static int numPlayers;
     private static String reservationDate; 
     private static String timeStart;     
-    private static String timeEnd;   
+    private static String timeEnd;  
+    private static String gameName;
     
     public static void clearReservation() {
         userId = 0;
@@ -18,8 +22,24 @@ public class Reservation {
         timeStart = null;
         timeEnd = null;
     }
-
+    	
     // Getters
+    public static Object[] getAllData() {
+        Object[] data = new Object[] {
+            userId,
+            gameId,
+            numPlayers,
+            reservationDate,
+            timeStart,
+            timeEnd
+        };
+
+        Debugger.print("Reservation data → " + Arrays.toString(data));
+
+        return data;
+    }
+
+
     public static int getUserId() {
         return userId;
     }
@@ -43,7 +63,10 @@ public class Reservation {
     public static String getTimeEnd() {
         return timeEnd;
     }
-
+    
+    public static String getGameName() {
+    	return gameName;
+    }
     // Setters
     public static void setDateTime(LocalDateTime dateTime) {
         if (dateTime == null) return;
@@ -78,4 +101,9 @@ public class Reservation {
     public static void setTimeEnd(String timeEnd) {
         Reservation.timeEnd = timeEnd;
     }
+    
+    public static void setGameName(String gameName) {
+		Reservation.gameName = gameName;
+	}
+
 }
