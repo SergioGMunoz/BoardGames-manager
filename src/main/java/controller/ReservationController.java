@@ -19,6 +19,7 @@ public class ReservationController extends Controller {
 	public ReservationController() {
 		this.reservationDataView = new ReservationDataView(this);
 		this.reservationDAO = new ReservationDAO();
+		Reservation.clearReservation();
 	}
 
 	public void startReservation() {
@@ -35,6 +36,7 @@ public class ReservationController extends Controller {
 	// Intenta pasar al siguiente paso
 	public void tryNext() {
 		// Guardamos los datos en variables de reserva
+		Reservation.setUserId(Session.getId());
 		Reservation.setDateTime(reservationDataView.getDateTime());
 		Reservation.setNumPlayers(reservationDataView.getPlayers());
 		

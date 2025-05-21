@@ -1245,6 +1245,7 @@ INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_
 (2, 10, 3, '2025-05-31', '19:00:00', '20:00:00');  -- Dixit Odyssey
 
 INSERT INTO RESERVATIONS (id_user, id_game, num_players, reservation_date, time_start, time_end) VALUES
-(1, 2, 4, '2025-05-29', '10:00:00', '20:00:00');
+(1, 2, 4, '2025-05-29', '10:00:00', '20:00:00'),
+(1, 2, 4, '2025-05-28', '15:00:00', '20:00:00');
 
 SELECT * FROM users;

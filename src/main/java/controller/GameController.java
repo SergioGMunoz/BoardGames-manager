@@ -1,9 +1,13 @@
 package controller;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import model.GameDAO;
 import model.Reservation;
+import model.ReservationDAO;
 import utils.Debugger;
 import view.GameTable;
 import view.GamesListView;
@@ -97,6 +101,46 @@ public class GameController extends Controller{
 	
 	public void tryGoNext() {
 		System.out.println("Intentando ir a Reservation parte 3");
+		
+		int selectedRow = gameTable.getSelectedRow();
+
+		if (selectedRow == -1) {
+			 Debugger.printErr("Ninguna fila selecionada en game table");
+			 return;
+		} 
+		
+		Integer idGame = (Integer) gameTable.getValueAt(selectedRow, 0); 
+		Reservation.setGameId(idGame);
+		Debugger.print("Juego selecionado id -> " + idGame);
+		
+		// Recoger los datos de tiempo
+	    LocalTime startTime = LocalTime.parse(Reservation.getTimeStart()); 
+	    // Convertir duración a minutos
+	    LocalTime duration = LocalTime.parse(gameDAO.getGameDurationByID(idGame));      
+	    Duration dur = Duration.between(LocalTime.MIN, duration);
+
+	    // Calcular tiempo terminar
+	    LocalTime endTime = startTime.plus(dur);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+	    Reservation.setTimeEnd(endTime.format(formatter));
+
+		
+	    // Validar si la hora de terminar el usuario tiene una reserva de algun juego
+	    ReservationDAO reservationDAO = new ReservationDAO();
+	    Debugger.print("Llamando al método getUserReservationBusy con tiempo de fin.");
+	    Debugger.print("DATOS → userId: " + Reservation.getUserId()
+	        + ", fecha: " + Reservation.getReservationDate()
+	        + ", hora inicio: " + Reservation.getTimeStart()
+	        + ", hora fin: " + Reservation.getTimeEnd());
+
+	    boolean userBusy = reservationDAO.getUserReservationBusy(Reservation.getUserId(), Reservation.getReservationDate(), 
+	    		Reservation.getTimeStart(), Reservation.getTimeEnd());
+		
+	    if (userBusy) {
+	    	gamesListView.showError("La reserva de ese juego se solapa con otra tuya");
+	    }else {
+	    	goNexr();
+	    }
 	}
 	
 	public void goNexr() {

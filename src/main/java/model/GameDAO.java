@@ -168,6 +168,27 @@ public class GameDAO {
 
 	    return games;
 	}
+	
+	// Devuelve la duracion de un juego en string HH:mm:ss por su ID
+	public String getGameDurationByID(int id) {
+	    String duration = null;
+	    String sql = "SELECT duration FROM games WHERE id = ?";
+
+	    try {
+	        PreparedStatement st = conn.prepareStatement(sql);
+	        st.setInt(1, id);
+	        try (ResultSet rs = st.executeQuery()) {
+	            if (rs.next()) {
+	                duration = rs.getString("duration");
+	            }
+	        }
+	    } catch (SQLException e) {
+	    	Debugger.printErr("Error SQL al obtener la duracion del juego id -> " + id);
+	        e.printStackTrace(); 
+	    }
+	    return duration;
+	}
+
 
 
 }
