@@ -73,11 +73,6 @@ FLUSH PRIVILEGES;
 
 
 -- Trigger para UPDATE
-
---Enlace de investigación:
--- Enlace de investigación SUBSTRING_INDEX:
---https://www.w3schools.com/mysql/func_mysql_substring_index.asp
-
 DELIMITER //
 CREATE TRIGGER check_email_before_insert
 BEFORE INSERT ON USERS
@@ -173,7 +168,7 @@ INSERT INTO GAME_CATEGORY (id_game, id_category) VALUES
 (16, 1),  -- Sushi Go - Cartas
 (17, 6),  -- Uno - Party
 (17, 1),  -- Uno - Cartas
-(17, 4),  -- Uno - Infantil
+(17, 4),  -- Uno - Infantil 
 (18, 3);  -- Wingspan - Estrategia
 
 SELECT "Script ejecutado correctamente" AS resultado;
