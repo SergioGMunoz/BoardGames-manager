@@ -15,17 +15,11 @@ if /I not "%runSQL%"=="Y" (
     goto end
 )
 
-REM 3. Check if the JAR exists
-if not exist "%JAR_PATH%" (
-    echo [ERROR] JAR file not found: %JAR_PATH%
-    pause
-    exit /b
-)
-
-REM 4. Run the application
+REM  Run the application
 java -jar "%JAR_PATH%"
 
 echo.
 
 :end
+pause
 
