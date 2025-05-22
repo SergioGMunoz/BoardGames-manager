@@ -88,7 +88,7 @@ Aquí se puede ver el diagrama de ventanas de la aplicación, con los diferentes
 
 Todos los diferentes JPanel se actualizan en la vista principal de forma que solo tenemos una ventana MainView donde se gestiona todo.
 
-![Diagrama de Ventanas](diagrams/diagrama-ventanas.png)
+![Diagrama de Ventanas](documentation/diagrams/diagrama-ventanas.png)
 
 ---
 
@@ -98,7 +98,7 @@ Todos los diferentes JPanel se actualizan en la vista principal de forma que sol
 
 Aquí se puede ver el diagrama de como esta estructurada la información en la Base de datos de mySQL.
 
-![Diagrama de Base de Datos](database/diagrama-bbdd.png)
+![Diagrama de Base de Datos](documentation/diagrams/diagrama-bbdd.png)
 
 ### Relaciones
 
@@ -149,7 +149,7 @@ Gracias a esta arquitectura es mucho más fácil poder escalar el proyecto.
 
 En este diagrama se pueden observar los diferentes paquetes del proyecto.
 
-![DiagramaPaquetes.png](diagrama-paquetes.png)
+![DiagramaPaquetes.png](documentation/diagrams/diagrama-paquetes.png)
 
 ### **Vistas `view`**
 
